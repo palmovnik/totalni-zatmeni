@@ -44,9 +44,11 @@
       <div class="grp" id="regs">
         <button class="reg active" data-r="all">🗺️ Celá cesta</button>
         <button class="reg" data-r="madrid">Madrid</button>
+        <button class="reg" data-r="meseta">Meseta / Loras</button>
         <button class="reg" data-r="soria">Soria</button>
         <button class="reg" data-r="picos">Picos</button>
         <button class="reg" data-r="coast">Pobřeží</button>
+        <button class="reg" data-r="ebro">Ebro / Rioja</button>
       </div>
     </div>
     <div class="bar" id="cats"></div>
@@ -72,7 +74,10 @@ const CATS = {
   fun:    {label:"🦕 Atrakce",         color:"#8e44ad"},
   nature: {label:"🌲 Příroda & výlety",color:"#12907a"},
   eclipse:{label:"☀️ Pozorování zatmění",color:"#e08e0b"},
-  camp:   {label:"🏕️ Rodinný kemp (hřiště/bazén)",color:"#a0522d"}
+  camp:   {label:"🏕️ Rodinný kemp (hřiště/bazén)",color:"#a0522d"},
+  wild:   {label:"🏜️ Divočina (přespat + západ)",color:"#d6336c"},
+  cave:   {label:"🕳️ Jeskyně",color:"#5d5fef"},
+  falls:  {label:"💦 Vodopády a tůně",color:"#00b3c8"}
 };
 
 // r = region (madrid/soria/picos/coast), c = kategorie, n = název, note, souřadnice přibližné (popup má odkaz na přesné hledání)
@@ -139,15 +144,79 @@ const POIS = [
   {r:"coast",c:"camp",n:"Camping Ribadesella", note:"Nejrodinnější kemp Španělska: tři bazény vč. dětského se skluzavkou, hřiště se skluzavkami a bludištěm, animace.", lat:43.457,lng:-5.073},
   {r:"coast",c:"camp",n:"Camping La Paz (Vidiago)", note:"Terasy nad pláží, výhled na moře i hory; u pláže Vidiago.", lat:43.392,lng:-4.632},
   {r:"coast",c:"camp",n:"Camping Playa de Vega (Ribadesella)", note:"Dětská zóna s trampolínami, u divoké pláže Vega.", lat:43.451,lng:-5.114},
-  {r:"coast",c:"camp",n:"Camping La Franca", note:"Pláž 200 m, bazén, večerní dětská kina.", lat:43.393,lng:-4.573}
+  {r:"coast",c:"camp",n:"Camping La Franca", note:"Pláž 200 m, bazén, večerní dětská kina.", lat:43.393,lng:-4.573},
+
+  /* ===================== DIVOČINA: opuštěné pláně s výhledem na západ (dá se přespat) ===================== */
+  {r:"meseta",c:"wild",n:"⭐ Páramo Cervera–Guardo (tvůj bod)", note:"Tvoje souřadnice: řídce osídlené páramo ~900–1000 m mezi Cervera de Pisuerga a Guardo. Prázdno, chladné noci, v pásu (totalita ~1:40+). Hledej polní odbočku na hřbetu s výhledem na Z–SZ.", lat:42.7468,lng:-4.5452},
+  {r:"meseta",c:"wild",n:"⭐ Páramo de La Lora / Valdivia", note:"Obří plochá vysočina ~1200 m (Geoparque de las Loras, Palencia/Burgos). Skoro liduprázdno, chladno, otevřený obzor. Poblíž jeskyně i vodopád — ideální kombinace na den D.", lat:42.780,lng:-4.100},
+  {r:"meseta",c:"wild",n:"Tierra de Campos (Frómista–Villalcázar)", note:"Nekonečné lány bez kopců = zaručený volný západní obzor. Nízko (~800 m), tedy tepleji; klid a spousta polních cest.", lat:42.270,lng:-4.400},
+  {r:"meseta",c:"wild",n:"Páramo Leonés (Valdevimbre)", note:"Plochý, prázdný páramo jižně od Leónu. Volný obzor, vinné sklípky v kopcích.", lat:42.350,lng:-5.600},
+  {r:"meseta",c:"wild",n:"Páramo de Masa (Burgos)", note:"Vysoká pustá plošina ~1000 m severně od Burgosu, minimum lidí.", lat:42.550,lng:-3.700},
+  {r:"meseta",c:"wild",n:"Montes Torozos (Villalba de los Alcores)", note:"Plochá plošina nad Valladolidem, duby a pole; blízko dálnici, ale prázdno.", lat:41.800,lng:-4.850},
+  {r:"meseta",c:"wild",n:"Alto Campoo / Brañavieja", note:"Vysoko (~1650 m), otevřené sjezdovky a parkoviště = nejchladnější noc a velký rozhled. Ověř, že hřebeny nestíní na ZSZ.", lat:43.050,lng:-4.380},
+  {r:"soria",c:"wild",n:"Collado Cruz de la Demanda", note:"~1850 m, Sierra de la Demanda. Vysoko a pusto, blízko střednice (dlouhá totalita). Poslední km úzké a strmé — s Nuggetem pomalu.", lat:42.200,lng:-3.050},
+  {r:"soria",c:"wild",n:"Sabinar de Calatañazor / páramo", note:"Otevřený jalovcový les a pláně kolem Calatañazoru — snadný přístup, prázdno, západ volný.", lat:41.710,lng:-2.840},
+  {r:"ebro",c:"wild",n:"Los Monegros (polopoušť)", note:"Vyprahlé pláně mezi Zaragozou a Huescou — pusto, obrovský obzor, nejjistější jasno. Ale v srpnu extrémní vedro (noc ~20 °C+).", lat:41.600,lng:-0.300},
+
+  /* ===================== JESKYNĚ ===================== */
+  {r:"meseta",c:"cave",n:"Cueva de los Franceses", note:"Krasová jeskyně na Páramo de La Lora (Revilla de Pomar), moderní návštěvnické centrum. ~16 km od Aguilar de Campoo.", lat:42.780,lng:-4.090},
+  {r:"meseta",c:"cave",n:"Cueva de Valporquero (León)", note:"Největší zpřístupněná jeskyně poloostrova. Parkoviště, restaurace s dětským menu, piknik a HŘIŠTĚ. Uvnitř ~7 °C — vezmi bundu!", lat:42.900,lng:-5.550},
+  {r:"meseta",c:"cave",n:"Ojo Guareña (Burgos)", note:"Obří jeskynní systém s poustevnou vytesanou ve skále — působivé i zvenku.", lat:43.020,lng:-3.650},
+  {r:"coast",c:"cave",n:"Cueva El Soplao (Cantábrie)", note:"„Sixtinská kaple geologie“ — excentrické krápníky, prohlídka ~1 h, vhodné pro děti všech věků.", lat:43.300,lng:-4.400},
+  {r:"coast",c:"cave",n:"Cuevas de Tito Bustillo (Ribadesella)", note:"Pravěké malby (UNESCO) + muzeum umění. Vstupenky rezervuj předem.", lat:43.460,lng:-5.070},
+  {r:"coast",c:"cave",n:"Museo de Altamira (Santillana del Mar)", note:"Replika slavné jeskyně („Neocueva“) — pro děti srozumitelné a hravé.", lat:43.380,lng:-4.120},
+  {r:"picos",c:"cave",n:"Cueva del Buxu (Cangas de Onís)", note:"Malá jeskyně s pravěkými rytinami, limitovaný počet návštěvníků denně.", lat:43.320,lng:-5.100},
+  {r:"ebro",c:"cave",n:"Cuevas de Ortigosa de Cameros (Rioja)", note:"Dvě propojené jeskyně nad vesnicí, lávky a osvětlené krápníky — děti nadšené.", lat:42.160,lng:-2.680},
+
+  /* ===================== VODOPÁDY A TŮNĚ ===================== */
+  {r:"meseta",c:"falls",n:"Cascada de Covalagua", note:"Vodopád a pramen řeky Ivia pod Páramo de La Lora — přírodní památka, krátká procházka.", lat:42.790,lng:-4.120},
+  {r:"meseta",c:"falls",n:"Orbaneja del Castillo (Burgos)", note:"Vodopád protékající přímo vesnicí do kaňonu Ebra + tyrkysové tůně. Nádhera (a v létě plno).", lat:42.830,lng:-3.800},
+  {r:"meseta",c:"falls",n:"Cascada de Mazobre / Fuente Cobre", note:"Vodopád a pramen Pisuergy v Montaña Palentina — chladné údolí.", lat:42.950,lng:-4.550},
+  {r:"meseta",c:"falls",n:"Cascada del Nervión (vyhlídka)", note:"Nejvyšší vodopád Španělska (222 m) — ⚠️ v srpnu často vyschlý, ale vyhlídka do kaňonu stojí za to.", lat:42.950,lng:-3.050},
+  {r:"soria",c:"falls",n:"Cascadas de Puente Ra", note:"Kaskády a tůňky v borovém lese (Sierra Cebollera) — příjemné osvěžení.", lat:42.050,lng:-2.750},
+  {r:"soria",c:"falls",n:"La Fuentona (Muriel de la Fuente)", note:"Tyrkysový vývěr řeky Abión, snadná cesta lesem ~1,5 km.", lat:41.740,lng:-2.900},
+  {r:"ebro",c:"falls",n:"Nacedero del Urederra (Navarra)", note:"Smaragdové tůně a kaskády — jedno z nejkrásnějších míst Španělska. ⚠️ Nutná rezervace vstupu; trasa ~5 km tam a zpět.", lat:42.780,lng:-2.200},
+
+  /* ===================== KOUPÁNÍ: jezera a přehrady ===================== */
+  {r:"meseta",c:"swim",n:"Embalse de Aguilar de Campoo", note:"„Palencijské moře“ — pláže, prostor na běhání, půjčovny. Nejlepší koupání v okolí Loras.", lat:42.800,lng:-4.280},
+  {r:"meseta",c:"swim",n:"Embalse de Ruesga (Cervera)", note:"Menší horská přehrada u Cervery — klid a chládek, hned u tvého páramo bodu.", lat:42.860,lng:-4.510},
+  {r:"meseta",c:"swim",n:"Embalse de Camporredondo / Compuerto", note:"Ruta de los Pantanos — horské přehrady pod štíty, 54 km scénické silnice.", lat:42.850,lng:-4.750},
+  {r:"meseta",c:"swim",n:"Pantano de Riaño", note:"Tyrkysová přehrada pod štíty Picos — jedno z nejfotogeničtějších míst severu.", lat:42.970,lng:-5.000},
+  {r:"meseta",c:"swim",n:"Embalse del Ebro (Cantábrie)", note:"Obrovská mělká přehrada ~840 m, pláže a plachetnice.", lat:42.980,lng:-3.950},
+  {r:"ebro",c:"swim",n:"Embalse González Lacasa (Rioja)", note:"Horská přehrada u Ortigosy — koupání a pláž.", lat:42.160,lng:-2.650},
+
+  /* ===================== ATRAKCE A ZAJÍMAVOSTI ===================== */
+  {r:"meseta",c:"fun",n:"Canal de Castilla — loď (Herrera de Pisuerga)", note:"Plavba lodí Marqués de la Ensenada po historickém kanálu ke zdymadlu, ~5 €. Pro malé děti paráda.", lat:42.590,lng:-4.330},
+  {r:"meseta",c:"fun",n:"Las Médulas (León)", note:"Rudé skalní věže — pozůstatek římských zlatých dolů (UNESCO). Jeskyně a vyhlídky.", lat:42.460,lng:-6.770},
+  {r:"meseta",c:"fun",n:"Mirador de Valcabado", note:"Balkon z okraje páramo nad údolím Valderredible — výhled na SEVER (na zatmění nevhodné, ale nádherné).", lat:42.800,lng:-4.050},
+  {r:"meseta",c:"fun",n:"Aguilar de Campoo (sušenky + klášter)", note:"Městečko s hradem nad ním, klášter Santa María la Real, „město sušenek“.", lat:42.795,lng:-4.260},
+  {r:"meseta",c:"nature",n:"Cañón del Ebro (Pesquera de Ebro)", note:"Vápencový kaňon se supy a klidnými vesničkami.", lat:42.780,lng:-3.770},
+  {r:"meseta",c:"play",n:"Parque del Salón (Palencia)", note:"Centrální park s hřištěm a stínem — dobrá zastávka na protažení.", lat:42.010,lng:-4.530},
+  {r:"meseta",c:"play",n:"Parque de Quevedo (León)", note:"Hřiště a zeleň u řeky v Leónu.", lat:42.605,lng:-5.575},
+  {r:"coast",c:"fun",n:"Parque de la Naturaleza de Cabárceno", note:"Obří přírodní park — sloni, medvědi, žirafy ve volných výbězích + lanovka. TOP hit pro čtyřletého.", lat:43.350,lng:-3.830},
+  {r:"coast",c:"fun",n:"Santillana del Mar", note:"Pohádkově zachovalé středověké městečko, kočičí hlavy, zmrzlina.", lat:43.390,lng:-4.110},
+  {r:"coast",c:"swim",n:"Playa de Cuevas del Mar (Llanes)", note:"Skalní brány a mělká zátoka — jako přírodní hřiště.", lat:43.420,lng:-4.900},
+  {r:"coast",c:"swim",n:"Playa de Torimbia", note:"Divoká mušlovitá pláž s dokonalou orientací na západ (sestup pěšky ~10 min).", lat:43.444,lng:-4.898},
+  {r:"picos",c:"nature",n:"Desfiladero de La Hermida", note:"Nejhlubší soutěska Španělska — jízda autem mezi kolmými stěnami.", lat:43.240,lng:-4.630},
+  {r:"picos",c:"nature",n:"Ruta del Cares (jen první úsek)", note:"Slavná soutěska; s malým dítětem jen kousek od Poncebos a zpět — dál jsou srázy.", lat:43.260,lng:-4.820},
+  {r:"ebro",c:"fun",n:"Sendaviva (Navarra)", note:"Zábavní park se zvířaty, atrakcemi a show — největší dětský tahák v okolí Bardenas.", lat:42.220,lng:-1.550},
+  {r:"ebro",c:"fun",n:"⚠️ Bardenas Reales (jen přes den!)", note:"Fascinující polopoušť, ALE: park zavírá hodinu před západem a přespání i kempování je ZAKÁZÁNO — na zatmění se tam být nedá. Navštiv přes den.", lat:42.200,lng:-1.500},
+  {r:"ebro",c:"camp",n:"Área autocaravanas Arguedas", note:"Zdarma, 5 km od Bardenas, výlevka i voda — legální nocleh po výletě do polopouště.", lat:42.180,lng:-1.600},
+  {r:"ebro",c:"fun",n:"Mallos de Riglos (Huesca)", note:"Obří rudé skalní věže nad vesnicí, hnízdí tu supi — dech beroucí.", lat:42.350,lng:-0.720},
+  {r:"ebro",c:"nature",n:"Foz de Lumbier (Navarra)", note:"Krátká soutěska po staré železnici s tunely a supy — ideální délka pro děti.", lat:42.650,lng:-1.300},
+  {r:"ebro",c:"nature",n:"Selva de Irati", note:"Rozlehlý bukový prales, chladno a stín i v srpnu.", lat:42.980,lng:-1.100},
+  {r:"ebro",c:"fun",n:"Barranco Perdido (Enciso, Rioja)", note:"Dinosauří paleo-dobrodružný park se stopami dinosaurů a vodní zónou.", lat:42.140,lng:-2.270},
+  {r:"ebro",c:"fun",n:"Acuario de Zaragoza", note:"Jedno z největších sladkovodních akvárií v Evropě.", lat:41.660,lng:-0.900}
 ];
 
 const BOUNDS = {
-  all:    [[40.25,-6.05],[43.70,-2.40]],
+  all:    [[40.25,-6.85],[43.70,-0.20]],
   madrid: [[40.25,-4.40],[41.05,-3.55]],
-  soria:  [[41.60,-3.20],[42.15,-1.55]],
+  meseta: [[41.70,-6.00],[43.10,-3.55]],
+  soria:  [[41.60,-3.30],[42.30,-1.55]],
   picos:  [[43.00,-6.10],[43.45,-4.55]],
-  coast:  [[43.35,-5.95],[43.70,-4.40]]
+  coast:  [[43.25,-5.95],[43.70,-3.75]],
+  ebro:   [[41.50,-2.80],[43.00,-0.20]]
 };
 
 /* ---- základní vrstva ---- */
@@ -155,11 +224,19 @@ const map = L.map('map',{zoomControl:true}).setView([42.6,-4.3],6);
 const useMapy = MAPY_KEY.trim().length > 0;
 const keynote = document.getElementById('keynote');
 
+const NOTE = ' <span style="opacity:.85">📍 Souřadnice orientační (ověř odkazem v bublině). 🏜️ Nocleh: toleruje se <b>parkování</b>, ne rozložený kemping; v NP a na plážích zakázáno.</span>';
+
 function osmLayer(){
   return L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     {maxZoom:19, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
 }
-let base;
+let base, swapped=false;
+function fallbackToOSM(msg){
+  if(swapped) return; swapped=true;
+  try{ map.removeLayer(base); }catch(e){}
+  osmLayer().addTo(map);
+  keynote.innerHTML='⚠️ <b>'+msg+'</b> — přepnuto na OpenStreetMap.'+NOTE;
+}
 if(useMapy){
   base = L.tileLayer('https://api.mapy.cz/v1/maptiles/outdoor/256/{z}/{x}/{y}?apikey='+encodeURIComponent(MAPY_KEY),
     {maxZoom:19, attribution:'&copy; <a href="https://mapy.cz/" target="_blank">Seznam.cz, a.s.</a> a další'});
@@ -171,18 +248,22 @@ if(useMapy){
     return a;
   }});
   map.addControl(new Logo());
-  // když klíč nefunguje, spadni na OSM
-  let swapped=false;
-  base.on('tileerror',function(){ if(swapped) return; swapped=true;
-    map.removeLayer(base); osmLayer().addTo(map);
-    keynote.innerHTML='⚠️ <b>Klíč mapy.cz nefunguje</b> (nebo vyčerpaný limit) — přepnuto na OpenStreetMap. Zkontroluj klíč v souboru.';
-  });
-  keynote.innerHTML='✅ Podklad <b>mapy.cz (outdoor)</b>. (Kdyby dlaždice nenaběhly, ověř klíč — mezitím naskočí OpenStreetMap.)';
+  // když klíč nefunguje (403 / limit), spadni na OSM
+  base.on('tileerror',function(){ fallbackToOSM('Dlaždice mapy.cz se nenačetly'); });
+  keynote.innerHTML='✅ Podklad <b>mapy.cz (outdoor)</b>.'+NOTE;
 }else{
   base = osmLayer();
-  keynote.innerHTML='ℹ️ Používá se <b>OpenStreetMap</b>. Chceš turistický podklad mapy.cz? Vlož klíč z <a href="https://developer.mapy.com" target="_blank">developer.mapy.com</a> do proměnné <b>MAPY_KEY</b> na začátku skriptu.';
+  keynote.innerHTML='ℹ️ <b>OpenStreetMap</b> — pro mapy.cz vlož klíč do <b>MAPY_KEY</b>.'+NOTE;
 }
 base.addTo(map);
+
+// pojistka: když do 5 s nenaběhne ani jedna dlaždice, přepni na OSM
+if(useMapy){
+  setTimeout(function(){
+    var ok=[].slice.call(document.querySelectorAll('.leaflet-tile')).some(function(i){return i.complete && i.naturalWidth>0;});
+    if(!ok) fallbackToOSM('Podklad mapy.cz nedostupný (klíč/doména?)');
+  },5000);
+}
 
 /* ---- markery po kategoriích ---- */
 function pinIcon(color,emoji){
