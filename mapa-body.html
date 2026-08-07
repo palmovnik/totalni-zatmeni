@@ -71,7 +71,8 @@ const CATS = {
   play:   {label:"🛝 Hřiště & parky",  color:"#27ae60"},
   fun:    {label:"🦕 Atrakce",         color:"#8e44ad"},
   nature: {label:"🌲 Příroda & výlety",color:"#12907a"},
-  eclipse:{label:"☀️ Pozorování zatmění",color:"#e08e0b"}
+  eclipse:{label:"☀️ Pozorování zatmění",color:"#e08e0b"},
+  camp:   {label:"🏕️ Rodinný kemp (hřiště/bazén)",color:"#a0522d"}
 };
 
 // r = region (madrid/soria/picos/coast), c = kategorie, n = název, note, souřadnice přibližné (popup má odkaz na přesné hledání)
@@ -125,7 +126,17 @@ const POIS = [
   {r:"coast",c:"nature", n:"Camín Encantáu (Llanes/Cué)", note:"„Začarovaná“ cesta s malovanými kameny.", lat:43.4200,lng:-4.7200},
   {r:"coast",c:"eclipse",n:"Faro de Cabo Peñas — pozorování", note:"Úplně volný obzor nad mořem, totalita ~1:44.", lat:43.6570,lng:-5.8470},
   {r:"coast",c:"eclipse",n:"Paseo de San Pedro, Llanes — pozorování", note:"Travnatá promenáda, nekonečný výhled na západ.", lat:43.4220,lng:-4.7570},
-  {r:"coast",c:"eclipse",n:"Ribadesella — Mirador de Guía", note:"Návrší nad ústím, volný obzor na moře.", lat:43.4630,lng:-5.0610}
+  {r:"coast",c:"eclipse",n:"Ribadesella — Mirador de Guía", note:"Návrší nad ústím, volný obzor na moře.", lat:43.4630,lng:-5.0610},
+
+  // ---------- RODINNÉ KEMPY (hřiště/bazén, nejlépe hodnocené, chládek/výhled) ----------
+  {r:"soria",c:"camp",n:"Camping El Concurso (Abejar)", note:"Borový les ~1100 m (chládek), bazén, hřiště, minigolf; 3 km od Playa Pita. Velmi dobře hodnocený.", lat:41.803,lng:-2.787},
+  {r:"soria",c:"camp",n:"Camping Urbión (Covaleda)", note:"U přehrady Cuerda del Pozo, bazén, bungalovy, borovice, chládek.", lat:41.902,lng:-2.856},
+  {r:"picos",c:"camp",n:"Camping Picos de Europa (Avín)", note:"Dva bazény (krytý i venkovní), hřiště, sportoviště, ploché parcely s výhledem na hory. Skvělá hodnocení.", lat:43.323,lng:-4.916},
+  {r:"picos",c:"camp",n:"Camping Covadonga (Soto de Cangas)", note:"Rodinný (8,6/10), hřiště; u Cangas de Onís a Covadongy.", lat:43.336,lng:-5.098},
+  {r:"coast",c:"camp",n:"Camping Ribadesella", note:"Nejrodinnější kemp Španělska: tři bazény vč. dětského se skluzavkou, hřiště se skluzavkami a bludištěm, animace.", lat:43.457,lng:-5.073},
+  {r:"coast",c:"camp",n:"Camping La Paz (Vidiago)", note:"Terasy nad pláží, výhled na moře i hory; u pláže Vidiago.", lat:43.392,lng:-4.632},
+  {r:"coast",c:"camp",n:"Camping Playa de Vega (Ribadesella)", note:"Dětská zóna s trampolínami, u divoké pláže Vega.", lat:43.451,lng:-5.114},
+  {r:"coast",c:"camp",n:"Camping La Franca", note:"Pláž 200 m, bazén, večerní dětská kina.", lat:43.393,lng:-4.573}
 ];
 
 const BOUNDS = {
