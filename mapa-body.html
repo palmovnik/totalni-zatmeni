@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa dětských bodů — zatmění 2026 (Španělsko)</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{--gold:#b4610b;--ink:#161b38;--panel:#ffffff;--line:#d9deef}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink)}
+  #app{display:flex;flex-direction:column;height:100%}
+  header{padding:.55rem .8rem;background:#0e1330;color:#fff;display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center}
+  header h1{font-size:1rem;margin:0;font-weight:600;white-space:nowrap}
+  header .sub{font-size:.78rem;color:#aab0d8}
+  .bar{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center}
+  .bar .grp{display:flex;flex-wrap:wrap;gap:.3rem;align-items:center}
+  button.reg{font:600 .8rem/1 system-ui;padding:.4rem .6rem;border-radius:999px;border:1px solid #3a4270;background:#1a2149;color:#e8 eaf7;color:#e8eaf7;cursor:pointer}
+  button.reg:hover{background:#26305e}
+  button.reg.active{background:var(--gold);border-color:var(--gold);color:#fff}
+  .cat{display:inline-flex;align-items:center;gap:.3rem;font-size:.8rem;background:#1a2149;border:1px solid #3a4270;border-radius:999px;padding:.28rem .55rem;cursor:pointer;user-select:none;color:#e8eaf7}
+  .cat input{accent-color:var(--gold);margin:0}
+  .cat .sw{width:.7rem;height:.7rem;border-radius:50%;display:inline-block}
+  #map{flex:1;min-height:0}
+  .note{background:#fff7e6;color:#5a4a1e;border-bottom:1px solid #f0dca8;padding:.45rem .8rem;font-size:.82rem}
+  .note b{color:#8a5a00}
+  .note a{color:#8a5a00}
+  .pin{width:26px;height:26px;border-radius:50% 50% 50% 2px;transform:rotate(45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.4);border:2px solid #fff}
+  .pin span{transform:rotate(-45deg);font-size:14px;line-height:1}
+  .leaflet-popup-content{font-size:.9rem;line-height:1.4;margin:.7rem .9rem}
+  .leaflet-popup-content b{font-size:.95rem}
+  .pop-cat{display:inline-block;font-size:.72rem;font-weight:600;padding:.05rem .4rem;border-radius:6px;color:#fff;margin-bottom:.25rem}
+  .pop-meta{color:#667;font-size:.78rem;margin-top:.35rem;font-family:ui-monospace,Menlo,monospace}
+  .pop-meta a{color:var(--gold)}
+  @media (max-width:620px){header h1{font-size:.9rem}.sub{display:none}}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>🌞 Dětské body na cestě za zatměním</h1>
+    <span class="sub">koupání · hřiště · atrakce · příroda · pozorování</span>
+    <div class="bar" style="margin-left:auto">
+      <div class="grp" id="regs">
+        <button class="reg active" data-r="all">🗺️ Celá cesta</button>
+        <button class="reg" data-r="madrid">Madrid</button>
+        <button class="reg" data-r="soria">Soria</button>
+        <button class="reg" data-r="picos">Picos</button>
+        <button class="reg" data-r="coast">Pobřeží</button>
+      </div>
+    </div>
+    <div class="bar" id="cats"></div>
+  </header>
+  <div class="note" id="keynote"></div>
+  <div id="map"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ============================================================
+   NASTAVENÍ MAPY.CZ  —  jak to zprovoznit:
+   1) Zdarma si vytvoř API klíč na  https://developer.mapy.com  (REST API).
+   2) Klíč vlož mezi uvozovky níže do MAPY_KEY.
+   3) Ulož a otevři tenhle soubor v prohlížeči.
+   Bez klíče se automaticky použije OpenStreetMap, takže mapa funguje i tak.
+   ============================================================ */
+const MAPY_KEY = "";   // <-- SEM vlož svůj mapy.cz klíč (např. "abcd1234...")
+
+const CATS = {
+  swim:   {label:"🏊 Koupání",        color:"#2e86de"},
+  play:   {label:"🛝 Hřiště & parky",  color:"#27ae60"},
+  fun:    {label:"🦕 Atrakce",         color:"#8e44ad"},
+  nature: {label:"🌲 Příroda & výlety",color:"#12907a"},
+  eclipse:{label:"☀️ Pozorování zatmění",color:"#e08e0b"}
+};
+
+// r = region (madrid/soria/picos/coast), c = kategorie, n = název, note, souřadnice přibližné (popup má odkaz na přesné hledání)
+const POIS = [
+  // ---------- MADRID (přílet/návrat, cca do 1,5 h) ----------
+  {r:"madrid",c:"play",  n:"Parque del Retiro (Madrid)", note:"Velký park, loďky na jezírku, loutky, hřiště.", lat:40.4153,lng:-3.6829},
+  {r:"madrid",c:"play",  n:"Madrid Río", note:"Obří hřiště a brouzdaliště podél řeky.", lat:40.3900,lng:-3.7180},
+  {r:"madrid",c:"fun",   n:"Zoo Aquarium de Madrid", note:"Zoo + akvárium, delfíni, pandy.", lat:40.4092,lng:-3.7628},
+  {r:"madrid",c:"fun",   n:"Faunia (Madrid)", note:"Přírodní zábavní park — zvířata, mokřady, tučňáci.", lat:40.4030,lng:-3.6150},
+  {r:"madrid",c:"fun",   n:"Teleférico de Madrid", note:"Lanovka nad Casa de Campo.", lat:40.4319,lng:-3.7260},
+  {r:"madrid",c:"fun",   n:"Akvadukt Segovia", note:"Obří římský akvadukt — děti zírají.", lat:40.9481,lng:-4.1184},
+  {r:"madrid",c:"fun",   n:"Alcázar de Segovia", note:"Pohádkový hrad (prý inspirace Popelky).", lat:40.9527,lng:-4.1320},
+  {r:"madrid",c:"nature",n:"La Granja de San Ildefonso", note:"Palác + zahrady a fontány.", lat:40.9008,lng:-4.0025},
+  {r:"madrid",c:"swim",  n:"Las Presillas de Rascafría", note:"Přírodní koupání v horské řece (Sierra Guadarrama) — studené, ale super.", lat:40.9075,lng:-3.8790},
+  {r:"madrid",c:"swim",  n:"Embalse de San Juan (playas)", note:"„Madridská pláž“ — koupání v přehradě ~1 h západně.", lat:40.3760,lng:-4.3200},
+
+  // ---------- SORIA / PINARES ----------
+  {r:"soria",c:"swim",   n:"Playa Pita (Cuerda del Pozo)", note:"Písečná „pláž“ u přehrady ve výšce — koupání v chládku.", lat:41.8680,lng:-2.8300},
+  {r:"soria",c:"swim",   n:"Embalse Cuerda del Pozo — La Muedra", note:"Další rekreační břeh přehrady.", lat:41.8600,lng:-2.7900},
+  {r:"soria",c:"nature", n:"Laguna Negra", note:"Ledovcové jezero pod skalami, krátká procházka (koupání zakázané).", lat:41.9970,lng:-2.8480},
+  {r:"soria",c:"nature", n:"Cañón del Río Lobos", note:"Kaňon se supy, řeka a ermita — snadná procházka.", lat:41.7500,lng:-3.0600},
+  {r:"soria",c:"nature", n:"Monte Valonsadero", note:"Otevřená dehesa, jeskynní malby. ☀️ i pozorovací bod.", lat:41.8230,lng:-2.5300},
+  {r:"soria",c:"play",   n:"Alameda de Cervantes (Soria)", note:"Městský park — hřiště, kolotoč, stín.", lat:41.7660,lng:-2.4700},
+  {r:"soria",c:"fun",    n:"Numancia (Garray)", note:"Keltiberské ruiny na návrší.", lat:41.8144,lng:-2.4478},
+  {r:"soria",c:"fun",    n:"Calatañazor", note:"Středověká vesnička s hradem, otevřený sabinar.", lat:41.7010,lng:-2.8220},
+  {r:"soria",c:"nature", n:"Castroviejo (skalní město)", note:"Bizarní pískovcové útvary u Duruelo — bludiště pro děti.", lat:41.9600,lng:-2.9600},
+  {r:"soria",c:"eclipse",n:"Numancia / Garray — pozorování", note:"Široký obzor, ~10 min od Sorie. Ověřený bod.", lat:41.8144,lng:-2.4478},
+  {r:"soria",c:"eclipse",n:"Calatañazor — pozorování", note:"Návrší s otevřeným západem.", lat:41.7010,lng:-2.8220},
+
+  // ---------- PICOS DE EUROPA ----------
+  {r:"picos",c:"nature", n:"Lagos de Covadonga (Enol/Ercina)", note:"Horská jezera, procházka; koupání studené.", lat:43.2710,lng:-4.9880},
+  {r:"picos",c:"fun",    n:"Santuario de Covadonga", note:"Svatyně + jeskyně s vodopádem.", lat:43.3090,lng:-5.0560},
+  {r:"picos",c:"fun",    n:"Teleférico de Fuente Dé", note:"Lanovka 750 m nahoru do hor (kantaberská strana).", lat:43.1460,lng:-4.8150},
+  {r:"picos",c:"play",   n:"Cangas de Onís (řím. most, řeka Sella)", note:"Městečko, most, hřiště, u řeky.", lat:43.3510,lng:-5.1320},
+  {r:"picos",c:"swim",   n:"Řeka Sella — Arriondas", note:"Start kánoí; tůně a oblázkové břehy.", lat:43.3880,lng:-5.1830},
+  {r:"picos",c:"fun",    n:"Senda del Oso + medvědi Paca", note:"Medvědí cyklostezka a výběh s medvědy (Proaza/Tuñón).", lat:43.2000,lng:-6.0000},
+  {r:"picos",c:"fun",    n:"Funicular de Bulnes", note:"Pozemní lanovka do vesnice bez silnice.", lat:43.2530,lng:-4.8300},
+  {r:"picos",c:"nature", n:"Potes (městečko)", note:"Malebné centrum, mosty, zmrzlina.", lat:43.1560,lng:-4.6290},
+
+  // ---------- POBŘEŽÍ (ASTURIE) ----------
+  {r:"coast",c:"swim",   n:"Playa de Poo (Llanes)", note:"Mělká klidná laguna — IDEÁLNÍ pro malé děti.", lat:43.4280,lng:-4.7840},
+  {r:"coast",c:"swim",   n:"Playa de Gulpiyuri", note:"Mini pláž uprostřed louky — přírodní unikát.", lat:43.4430,lng:-4.8550},
+  {r:"coast",c:"swim",   n:"Playa de Toró (Llanes)", note:"Skalní jehly a tůňky mezi nimi.", lat:43.4210,lng:-4.7460},
+  {r:"coast",c:"swim",   n:"Playa de Santa Marina (Ribadesella)", note:"Dlouhá městská pláž s promenádou.", lat:43.4620,lng:-5.0750},
+  {r:"coast",c:"swim",   n:"Playa de Rodiles (Villaviciosa)", note:"Pláž, duny a borový háj.", lat:43.5320,lng:-5.3830},
+  {r:"coast",c:"swim",   n:"Playa de San Lorenzo (Gijón)", note:"Velká městská pláž v centru Gijónu.", lat:43.5450,lng:-5.6550},
+  {r:"coast",c:"fun",    n:"MUJA — Museo del Jurásico (Colunga)", note:"Dinosauři! Hit pro čtyřletého.", lat:43.4890,lng:-5.2450},
+  {r:"coast",c:"fun",    n:"Acuario de Gijón", note:"Akvárium na konci pláže San Lorenzo.", lat:43.5450,lng:-5.6960},
+  {r:"coast",c:"play",   n:"Parque de Isabel la Católica (Gijón)", note:"Park s kachnami/labutěmi a hřištěm.", lat:43.5390,lng:-5.6500},
+  {r:"coast",c:"nature", n:"Bufones de Pría", note:"Mořské „gejzíry“ tryskající ze skal.", lat:43.4570,lng:-4.9250},
+  {r:"coast",c:"nature", n:"Camín Encantáu (Llanes/Cué)", note:"„Začarovaná“ cesta s malovanými kameny.", lat:43.4200,lng:-4.7200},
+  {r:"coast",c:"eclipse",n:"Faro de Cabo Peñas — pozorování", note:"Úplně volný obzor nad mořem, totalita ~1:44.", lat:43.6570,lng:-5.8470},
+  {r:"coast",c:"eclipse",n:"Paseo de San Pedro, Llanes — pozorování", note:"Travnatá promenáda, nekonečný výhled na západ.", lat:43.4220,lng:-4.7570},
+  {r:"coast",c:"eclipse",n:"Ribadesella — Mirador de Guía", note:"Návrší nad ústím, volný obzor na moře.", lat:43.4630,lng:-5.0610}
+];
+
+const BOUNDS = {
+  all:    [[40.25,-6.05],[43.70,-2.40]],
+  madrid: [[40.25,-4.40],[41.05,-3.55]],
+  soria:  [[41.65,-3.15],[42.05,-2.40]],
+  picos:  [[43.00,-6.10],[43.45,-4.55]],
+  coast:  [[43.35,-5.95],[43.70,-4.40]]
+};
+
+/* ---- základní vrstva ---- */
+const map = L.map('map',{zoomControl:true}).setView([42.6,-4.3],6);
+const useMapy = MAPY_KEY.trim().length > 0;
+const keynote = document.getElementById('keynote');
+
+function osmLayer(){
+  return L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {maxZoom:19, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
+}
+let base;
+if(useMapy){
+  base = L.tileLayer('https://api.mapy.cz/v1/maptiles/outdoor/256/{z}/{x}/{y}?apikey='+encodeURIComponent(MAPY_KEY),
+    {maxZoom:19, attribution:'&copy; <a href="https://mapy.cz/" target="_blank">Seznam.cz, a.s.</a> a další'});
+  // povinné logo mapy.cz
+  const Logo = L.Control.extend({options:{position:'bottomleft'},onAdd:function(){
+    const a=L.DomUtil.create('a'); a.href='https://mapy.cz/'; a.target='_blank';
+    a.style.cssText='display:block;margin:0 0 4px 4px';
+    a.innerHTML='<img src="https://api.mapy.cz/img/api/logo.svg" alt="mapy.cz" style="height:18px;display:block">';
+    return a;
+  }});
+  map.addControl(new Logo());
+  // když klíč nefunguje, spadni na OSM
+  let swapped=false;
+  base.on('tileerror',function(){ if(swapped) return; swapped=true;
+    map.removeLayer(base); osmLayer().addTo(map);
+    keynote.innerHTML='⚠️ <b>Klíč mapy.cz nefunguje</b> (nebo vyčerpaný limit) — přepnuto na OpenStreetMap. Zkontroluj klíč v souboru.';
+  });
+  keynote.innerHTML='✅ Podklad <b>mapy.cz (outdoor)</b>. (Kdyby dlaždice nenaběhly, ověř klíč — mezitím naskočí OpenStreetMap.)';
+}else{
+  base = osmLayer();
+  keynote.innerHTML='ℹ️ Používá se <b>OpenStreetMap</b>. Chceš turistický podklad mapy.cz? Vlož klíč z <a href="https://developer.mapy.com" target="_blank">developer.mapy.com</a> do proměnné <b>MAPY_KEY</b> na začátku skriptu.';
+}
+base.addTo(map);
+
+/* ---- markery po kategoriích ---- */
+function pinIcon(color,emoji){
+  return L.divIcon({className:'', html:'<div class="pin" style="background:'+color+'"><span>'+emoji+'</span></div>',
+    iconSize:[26,26], iconAnchor:[13,24], popupAnchor:[0,-22]});
+}
+const groups={};
+Object.keys(CATS).forEach(k=>groups[k]=L.layerGroup().addTo(map));
+
+POIS.forEach(p=>{
+  const cat=CATS[p.c]; const emoji=cat.label.split(' ')[0];
+  const q=encodeURIComponent(p.n.split('—')[0].split('(')[0].trim());
+  const m=L.marker([p.lat,p.lng],{icon:pinIcon(cat.color,emoji)});
+  m.bindPopup(
+    '<span class="pop-cat" style="background:'+cat.color+'">'+cat.label+'</span><br>'+
+    '<b>'+p.n+'</b><br>'+p.note+
+    '<div class="pop-meta">'+p.lat.toFixed(4)+', '+p.lng.toFixed(4)+
+    ' · <a href="https://mapy.cz/zakladni?q='+q+'" target="_blank">mapy.cz</a>'+
+    ' · <a href="https://www.google.com/maps/search/'+q+'" target="_blank">google</a></div>'
+  );
+  m.addTo(groups[p.c]);
+});
+
+/* ---- ovládání: kategorie ---- */
+const catsBar=document.getElementById('cats');
+Object.entries(CATS).forEach(([k,v])=>{
+  const l=document.createElement('label'); l.className='cat';
+  l.innerHTML='<input type="checkbox" checked> <span class="sw" style="background:'+v.color+'"></span>'+v.label;
+  l.querySelector('input').addEventListener('change',e=>{
+    if(e.target.checked) groups[k].addTo(map); else map.removeLayer(groups[k]);
+  });
+  catsBar.appendChild(l);
+});
+
+/* ---- ovládání: regiony ---- */
+document.querySelectorAll('button.reg').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('button.reg').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    map.flyToBounds(BOUNDS[b.dataset.r],{padding:[20,20],duration:.6});
+  });
+});
+
+/* dorovnání velikosti kontejneru a napasování na celou cestu
+   (počkej, až má mapa reálnou výšku, jinak fitBounds spadne na maxZoom) */
+function fitAll(){ map.invalidateSize(); if(map.getSize().y<80){ setTimeout(fitAll,120); return; } map.fitBounds(BOUNDS.all,{padding:[20,20]}); }
+setTimeout(fitAll,150);
+window.addEventListener('load',fitAll);
+</script>
+</body>
+</html>

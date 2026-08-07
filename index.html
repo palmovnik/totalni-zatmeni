@@ -1,0 +1,1084 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Totální zatmění Slunce 12. 8. 2026 — rodinný plán z Madridu</title>
+<style>
+  :root{
+    /* light theme = odpolední obloha před zatměním */
+    --sky-1:#e9edf9;      /* page bg */
+    --sky-2:#ffffff;      /* panel */
+    --sky-3:#f3f5fd;      /* raised */
+    --ink:#161b38;
+    --ink-soft:#3d4570;
+    --ink-mute:#6a7299;
+    --line:rgba(30,40,90,.14);
+    --accent:#b4610b;     /* gold, ztmavené pro kontrast na světlé */
+    --accent-2:#8a4bb0;   /* corona fialová */
+    --good:#2f9e63;
+    --warn:#c1841a;
+    --risk:#cf4a34;
+    --card:#ffffff;
+    --card-line:rgba(30,40,90,.12);
+    --shadow:0 1px 2px rgba(20,25,60,.06),0 8px 26px rgba(20,25,60,.07);
+    --font-display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+    --font-body:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --font-mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    --wrap:64rem;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --sky-1:#0a0e26;
+      --sky-2:#121838;
+      --sky-3:#1a2149;
+      --ink:#eceefb;
+      --ink-soft:#bcc2e6;
+      --ink-mute:#8b93bd;
+      --line:rgba(180,190,235,.14);
+      --accent:#ffc061;
+      --accent-2:#c79be6;
+      --good:#4bbd7d;
+      --warn:#e8b64a;
+      --risk:#ef7256;
+      --card:rgba(255,255,255,.035);
+      --card-line:rgba(180,190,235,.14);
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.36);
+    }
+  }
+  :root[data-theme="dark"]{
+    --sky-1:#0a0e26;--sky-2:#121838;--sky-3:#1a2149;--ink:#eceefb;--ink-soft:#bcc2e6;
+    --ink-mute:#8b93bd;--line:rgba(180,190,235,.14);--accent:#ffc061;--accent-2:#c79be6;
+    --good:#4bbd7d;--warn:#e8b64a;--risk:#ef7256;--card:rgba(255,255,255,.035);
+    --card-line:rgba(180,190,235,.14);--shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.36);
+  }
+  :root[data-theme="light"]{
+    --sky-1:#e9edf9;--sky-2:#ffffff;--sky-3:#f3f5fd;--ink:#161b38;--ink-soft:#3d4570;
+    --ink-mute:#6a7299;--line:rgba(30,40,90,.14);--accent:#b4610b;--accent-2:#8a4bb0;
+    --good:#2f9e63;--warn:#c1841a;--risk:#cf4a34;--card:#ffffff;--card-line:rgba(30,40,90,.12);
+    --shadow:0 1px 2px rgba(20,25,60,.06),0 8px 26px rgba(20,25,60,.07);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--sky-1);color:var(--ink);
+    font-family:var(--font-body);font-size:16.5px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  .wrap{width:min(var(--wrap),92vw);margin-inline:auto}
+  a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+  h1,h2,h3{font-family:var(--font-display);font-weight:600;text-wrap:balance;line-height:1.12;margin:0}
+  p{margin:0}
+
+  .eyebrow{
+    font-family:var(--font-mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;
+  }
+
+  /* ---------- HERO (vždy tmavá obloha) ---------- */
+  .hero{
+    position:relative;overflow:hidden;color:#f3f0ff;
+    background:
+      radial-gradient(120% 90% at 18% -10%, rgba(255,192,97,.16), transparent 55%),
+      radial-gradient(90% 120% at 82% 8%, rgba(150,110,220,.20), transparent 60%),
+      linear-gradient(178deg,#0a0e28 0%,#111744 55%,#1b1c46 100%);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .hero::after{ /* horizontový svit dole */
+    content:"";position:absolute;left:0;right:0;bottom:-40px;height:150px;
+    background:radial-gradient(60% 100% at 30% 100%, rgba(255,150,70,.30), transparent 70%);
+    pointer-events:none;
+  }
+  .hero-inner{padding:clamp(2.6rem,6vw,5rem) 0 clamp(2.4rem,5vw,3.6rem);position:relative;z-index:2}
+  .hero .kicker{color:var(--accent);opacity:.95}
+  .corona{
+    position:relative;display:inline-flex;align-items:center;justify-content:center;
+    width:74px;height:74px;margin-bottom:1.2rem;
+  }
+  .corona .disc{width:30px;height:30px;border-radius:50%;background:#0a0e28;
+    box-shadow:0 0 0 3px rgba(255,205,120,.9),0 0 26px 10px rgba(255,190,110,.55),0 0 60px 24px rgba(200,150,255,.28)}
+  .corona::before{content:"";position:absolute;inset:0;border-radius:50%;
+    background:conic-gradient(from 0deg, rgba(255,220,150,.0),rgba(255,220,150,.55),rgba(255,220,150,.0) 20%, rgba(255,220,150,.0) 30%, rgba(210,170,255,.4),rgba(255,220,150,0) 55%, rgba(255,220,150,.5),rgba(255,220,150,0) 78%);
+    filter:blur(2px);animation:spin 34s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  h1.title{font-size:clamp(2.05rem,6.2vw,3.7rem);letter-spacing:-.01em}
+  .title .warm{color:#ffd08a}
+  .lede{margin-top:1.05rem;max-width:40ch;font-size:clamp(1.02rem,2.3vw,1.2rem);color:#d9d8f2}
+  .lede strong{color:#fff}
+
+  .facts{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:1px;margin-top:2.2rem;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);border-radius:14px;overflow:hidden;
+  }
+  .fact{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));padding:.95rem 1rem}
+  .fact .n{font-family:var(--font-mono);font-size:1.18rem;font-weight:600;color:#ffd08a;font-variant-numeric:tabular-nums}
+  .fact .l{font-size:.76rem;color:#b9bbe0;margin-top:.15rem;line-height:1.35}
+  @media (max-width:720px){.facts{grid-template-columns:repeat(2,1fr)}.fact:last-child{grid-column:1/-1}}
+
+  /* ---------- sekce ---------- */
+  section{padding:clamp(2.4rem,5vw,3.6rem) 0}
+  .sec-head{margin-bottom:1.5rem}
+  .sec-head h2{font-size:clamp(1.5rem,3.4vw,2.05rem);margin-top:.35rem}
+  .sec-head .sub{color:var(--ink-soft);margin-top:.5rem;max-width:60ch}
+  .divide{height:1px;background:var(--line);border:0;margin:0}
+
+  /* ---------- doporučení / strategie box ---------- */
+  .strategy{
+    background:
+      radial-gradient(120% 140% at 100% 0%, color-mix(in srgb,var(--accent) 12%, transparent), transparent 60%),
+      var(--card);
+    border:1px solid var(--card-line);border-left:4px solid var(--accent);
+    border-radius:14px;padding:1.3rem 1.4rem;box-shadow:var(--shadow);
+  }
+  .strategy h3{font-size:1.16rem;margin-bottom:.5rem}
+  .strategy p{color:var(--ink-soft)}
+  .strategy p + p{margin-top:.6rem}
+
+  /* ---------- MAPA ---------- */
+  .map-frame{
+    border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.10);
+    background:#0a0e28;box-shadow:var(--shadow);
+  }
+  .map-frame svg{display:block;width:100%;height:auto}
+  .map-cap{color:var(--ink-mute);font-size:.83rem;margin-top:.7rem;text-align:center}
+
+  /* ---------- karty variant ---------- */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
+  .cards.therm{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:760px){.cards{grid-template-columns:1fr}}
+  @media (max-width:820px){.cards.therm{grid-template-columns:1fr}}
+  .card{
+    position:relative;background:var(--card);border:1px solid var(--card-line);border-radius:15px;
+    padding:1.25rem 1.3rem 1.35rem;box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease;
+    display:flex;flex-direction:column;gap:.7rem;
+  }
+  .card:hover{transform:translateY(-3px)}
+  .card .stripe{position:absolute;left:0;top:0;bottom:0;width:5px;border-radius:15px 0 0 15px}
+  .card.rec .stripe{background:var(--accent)}
+  .card.sky .stripe{background:var(--good)}
+  .card.max .stripe{background:#3a86c9}
+  .card.coast .stripe{background:var(--risk)}
+  .card .tag{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);
+    font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:.28rem .55rem;border-radius:999px}
+  .tag.rec{color:var(--accent);background:color-mix(in srgb,var(--accent) 15%,transparent)}
+  .tag.sky{color:var(--good);background:color-mix(in srgb,var(--good) 15%,transparent)}
+  .tag.max{color:#3a86c9;background:color-mix(in srgb,#3a86c9 16%,transparent)}
+  .tag.coast{color:var(--risk);background:color-mix(in srgb,var(--risk) 15%,transparent)}
+  .card h3{font-size:1.24rem}
+  .card .meta{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.1rem}
+  .chip{font-family:var(--font-mono);font-size:.74rem;color:var(--ink-soft);background:var(--sky-3);
+    border:1px solid var(--card-line);border-radius:8px;padding:.2rem .5rem;font-variant-numeric:tabular-nums}
+  .card p{color:var(--ink-soft);font-size:.95rem}
+  .card ul{margin:.1rem 0 0;padding-left:1.05rem;color:var(--ink-soft);font-size:.92rem}
+  .card ul li{margin:.2rem 0}
+  .card .kids{font-size:.88rem;color:var(--ink-mute)}
+  .card .kids b{color:var(--ink-soft)}
+
+  /* ---------- tabulka ---------- */
+  .table-scroll{overflow-x:auto;border:1px solid var(--card-line);border-radius:14px;box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;min-width:660px;background:var(--card);font-size:.92rem}
+  thead th{
+    position:sticky;top:0;background:var(--sky-3);text-align:left;font-family:var(--font-mono);
+    font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute);
+    padding:.7rem .8rem;border-bottom:1px solid var(--card-line);white-space:nowrap;font-weight:600;
+  }
+  tbody td{padding:.62rem .8rem;border-bottom:1px solid var(--line);vertical-align:middle}
+  tbody tr:last-child td{border-bottom:0}
+  td.city{font-weight:600;color:var(--ink);white-space:nowrap}
+  td.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink-soft)}
+  tr.hi{background:color-mix(in srgb,var(--accent) 8%,transparent)}
+  .dot{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;margin-right:.4rem;vertical-align:baseline}
+  .dot.good{background:var(--good)}.dot.warn{background:var(--warn)}.dot.risk{background:var(--risk)}
+  .wx{white-space:nowrap;font-size:.86rem;color:var(--ink-soft)}
+
+  /* ---------- timeline ---------- */
+  .timeline{display:flex;flex-direction:column;gap:0}
+  .t-row{display:grid;grid-template-columns:8.5rem 1fr;gap:1.1rem;padding:1rem 0;border-bottom:1px solid var(--line);position:relative}
+  .t-row:last-child{border-bottom:0}
+  .t-when{font-family:var(--font-mono);font-size:.86rem}
+  .t-when .day{display:block;font-weight:600;color:var(--ink)}
+  .t-when .date{color:var(--ink-mute)}
+  .t-row.eclipse .t-when .day{color:var(--accent)}
+  .t-body h3{font-size:1.05rem;margin-bottom:.25rem}
+  .t-body p{color:var(--ink-soft);font-size:.95rem}
+  .t-row.eclipse{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 9%,transparent),transparent 70%);
+    border-radius:12px;padding-inline:1rem;margin-inline:-1rem}
+  @media (max-width:620px){.t-row{grid-template-columns:1fr;gap:.35rem}}
+
+  /* ---------- tips grid ---------- */
+  .tips{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+  @media (max-width:760px){.tips{grid-template-columns:1fr}}
+  .tip{background:var(--card);border:1px solid var(--card-line);border-radius:13px;padding:1.05rem 1.15rem;box-shadow:var(--shadow)}
+  .tip h3{font-size:1.04rem;display:flex;align-items:center;gap:.55rem;margin-bottom:.4rem}
+  .tip .ic{font-size:1.1rem;filter:saturate(1.1)}
+  .tip p{color:var(--ink-soft);font-size:.93rem}
+  .tip ul{margin:.35rem 0 0;padding-left:1.05rem;color:var(--ink-soft);font-size:.92rem}
+  .tip li{margin:.22rem 0}
+  .danger{border-color:color-mix(in srgb,var(--risk) 45%,transparent)}
+  .danger h3{color:var(--risk)}
+
+  /* ---------- sources ---------- */
+  .src-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem 2rem}
+  @media (max-width:700px){.src-grid{grid-template-columns:1fr}}
+  .src h3{font-size:.82rem;font-family:var(--font-mono);letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-mute);margin-bottom:.6rem;padding-bottom:.4rem;border-bottom:1px solid var(--line)}
+  .src ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.55rem}
+  .src li{line-height:1.35}
+  .src a{font-weight:600}
+  .src .note{display:block;color:var(--ink-mute);font-size:.82rem;font-weight:400}
+
+  footer{padding:2.4rem 0 3rem;color:var(--ink-mute);font-size:.85rem;border-top:1px solid var(--line)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:space-between}
+
+  .callout{background:color-mix(in srgb,var(--risk) 9%,transparent);border:1px solid color-mix(in srgb,var(--risk) 35%,transparent);
+    border-radius:12px;padding:.85rem 1.05rem;color:var(--ink-soft);font-size:.93rem;margin-top:1rem}
+  .callout b{color:var(--risk)}
+  .callout.info{background:color-mix(in srgb,var(--accent) 8%,transparent);border-color:color-mix(in srgb,var(--accent) 38%,transparent);margin-bottom:1.4rem}
+  .callout.info b{color:var(--accent)}
+
+  /* ---------- detailní oblasti ---------- */
+  .areas{display:flex;flex-direction:column;gap:1.4rem}
+  .area{background:var(--card);border:1px solid var(--card-line);border-radius:16px;padding:1.4rem 1.5rem;box-shadow:var(--shadow);border-top:4px solid var(--accent)}
+  .area.picos{border-top-color:var(--good)}
+  .area.coast{border-top-color:#3a86c9}
+  .area-tag{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--accent)}
+  .area.picos .area-tag{color:var(--good)}
+  .area.coast .area-tag{color:#3a86c9}
+  .area-head h3{font-size:clamp(1.35rem,3vw,1.7rem);margin:.35rem 0 .35rem}
+  .area-lead{color:var(--ink-soft);max-width:70ch}
+  .area .meta{margin-top:.85rem}
+  .area-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem 1.8rem;margin-top:1.3rem}
+  @media (max-width:680px){.area-grid{grid-template-columns:1fr}}
+  .block h4{font-size:.75rem;font-family:var(--font-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 .4rem;font-weight:600}
+  .block p{color:var(--ink-soft);font-size:.94rem}
+  .block.hybrid{background:color-mix(in srgb,#3a86c9 9%,transparent);border:1px solid color-mix(in srgb,#3a86c9 30%,transparent);border-radius:12px;padding:.85rem 1rem}
+  .block.hybrid h4{color:#3a86c9}
+  .spots-block{margin-top:1.25rem;border-top:1px solid var(--line);padding-top:1.15rem}
+  .spots{list-style:none;margin:.3rem 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem 1.8rem}
+  @media (max-width:680px){.spots{grid-template-columns:1fr}}
+  .spots li{font-size:.92rem;color:var(--ink-soft);line-height:1.42}
+  .spots b{color:var(--ink)}
+  .spots .why{color:var(--ink-mute)}
+  .spots a{font-size:.84rem;white-space:nowrap}
+  .gps{font-family:var(--font-mono);font-size:.82rem;color:var(--ink-mute);white-space:nowrap}
+
+  /* ---------- den D checklist ---------- */
+  .cl-title{font-family:var(--font-display);font-size:clamp(1.15rem,2.5vw,1.35rem);margin:2.2rem 0 1rem}
+  .checklist{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+  @media (max-width:820px){.checklist{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.checklist{grid-template-columns:1fr}}
+  .cl-cat{background:var(--card);border:1px solid var(--card-line);border-radius:13px;padding:1rem 1.1rem;box-shadow:var(--shadow)}
+  .cl-cat h4{font-size:.96rem;margin:0 0 .65rem;display:flex;align-items:center;gap:.5rem}
+  .cl-cat ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+  .cl-cat label{display:flex;gap:.55rem;align-items:flex-start;font-size:.9rem;color:var(--ink-soft);cursor:pointer;line-height:1.35}
+  .cl-cat input{margin-top:.15rem;width:1.05rem;height:1.05rem;accent-color:var(--accent);flex:0 0 auto;cursor:pointer}
+  .cl-cat label:focus-within{color:var(--ink)}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="corona" aria-hidden="true"><span class="disc"></span></div>
+    <div class="eyebrow kicker">Středa 12. srpna 2026 · severní Španělsko</div>
+    <h1 class="title">Totální zatmění Slunce<br>a jeden <span class="warm">Ford Nugget</span></h1>
+    <p class="lede">Rodinný plán z Madridu za <strong>úplným zatměním</strong> — se čtyřletým parťákem, obytňákem a jasným cílem: být ve správnou chvíli na správném místě s&nbsp;čistým západním obzorem, <strong>klidně až u moře</strong>.</p>
+
+    <div class="facts">
+      <div class="fact"><div class="n">20:28</div><div class="l">začátek totality (SELČ, Meseta)</div></div>
+      <div class="fact"><div class="n">~1:45</div><div class="l">délka totality (sever pásu)</div></div>
+      <div class="fact"><div class="n">~8°</div><div class="l">výška Slunce nad obzorem</div></div>
+      <div class="fact"><div class="n">~290 km</div><div class="l">šířka pásu totality</div></div>
+      <div class="fact"><div class="n">Madrid = mimo</div><div class="l">nutno vyrazit na sever</div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- STRATEGIE -->
+<section id="strategie">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Nejdůležitější věc na začátek</div>
+      <h2>O úspěchu rozhoduje počasí — a vy máte tajnou zbraň</h2>
+      <p class="sub">Toto zatmění nastává nízko nad obzorem při západu Slunce. Stačí jeden pruh mraků na západě a je po zážitku. Vy ale máte dva dny na cestu, obytňák a chuť jet klidně až k&nbsp;moři — pojďme toho využít.</p>
+    </div>
+    <div class="strategy">
+      <h3>Zamiřte na sever k moři — ale s únikovým plánem do vnitrozemí</h3>
+      <p>Celý sever je ve hře. Nejsilnější tah pro vás: užijte si <b>Picos de Europa a asturské pobřeží</b> (ráj pro obytňák i&nbsp;čtyřletého — hory, pláže, jeskyně) a&nbsp;na den D nechte rozhodnout předpověď:</p>
+      <p>👉 <b>Pobřeží jasné</b> → zůstaňte: totalita při západu <b>nad Kantaberským mořem</b>, stín se přižene přes vodu, tma ~1:45. Nezapomenutelné.<br>👉 <b>Pobřeží zatažené</b> → sjeďte <b>~1,5&nbsp;h na jih na Mesetu</b> (León/Palencia), kde je jasno skoro jisté a&nbsp;tma stejně dlouhá.</p>
+      <p>Pobřeží je totiž nejoblačnější část pásu (~60&nbsp;%), ale León leží kousek pod ním — takže máte moře i&nbsp;pojistku. Vyberte místo s&nbsp;<b>volným Z–SZ obzorem</b> (nad vodou, ne za mysem) a&nbsp;přijeďte včas.</p>
+      <div class="callout"><b>⚠️ Jediný tvrdý termín:</b> pátek — vrácení vozu a&nbsp;let z&nbsp;Madridu. Z&nbsp;pobřeží je to 4,5–6&nbsp;h, proto ve čtvrtek začněte couvat na jih (viz itinerář).</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divide">
+
+<!-- TEPLO -->
+<section id="teplo">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Vedro a spaní v autě</div>
+      <h2>Chládek řeší nadmořská výška — ne „sever"</h2>
+      <p class="sub">Spěte <b>nahoře</b> (hory, vysoká Meseta) nebo <b>u&nbsp;moře</b>; vyhněte se nížinám. Rozdíl v&nbsp;nočních teplotách je klidně 10&nbsp;°C. Čísla jsou srpnové normály — v&nbsp;horké vlně přičtěte pár stupňů, ale pořadí zůstává.</p>
+    </div>
+    <div class="cards therm">
+      <article class="card sky">
+        <span class="stripe"></span>
+        <span class="tag sky">🌊 Nejchladněji</span>
+        <h3>Pobřeží<br>Asturie / Kantábrie</h3>
+        <div class="meta"><span class="chip">den ~24–26°</span><span class="chip">noc ~16–18°</span><span class="chip">moře ~21°</span></div>
+        <p>Oceán drží teplotu — dny příjemné, noci na spaní ideální. Daň: <b>nejvíc mraků</b> na zatmění. Pozor na občasný horký jižní „viento sur", který naopak přinese vedro <i>i</i>&nbsp;jasno.</p>
+      </article>
+      <article class="card rec">
+        <span class="stripe"></span>
+        <span class="tag rec">★ Chládek + jasno</span>
+        <h3>Hory a vysoká Meseta<br>Soria · León · Picos</h3>
+        <div class="meta"><span class="chip">den ~28–32°</span><span class="chip">noc ~13–16°</span><span class="chip">Soria 1050 m</span></div>
+        <p>Výška srazí noc: <b>Soria ~13&nbsp;°C</b> (klidně pod 10!), León/Burgos ~14&nbsp;°C. K&nbsp;tomu dobrá obloha (Soria 73&nbsp;% jasno) a&nbsp;příroda — lesy, kaňony, jezera na ochlazení. Nejlepší kombinace <b>chládek + jistota zatmění</b>.</p>
+      </article>
+      <article class="card coast">
+        <span class="stripe"></span>
+        <span class="tag coast">🥵 Nejtepleji</span>
+        <h3>Nížina Ebro<br>Zaragoza, jižní pláně</h3>
+        <div class="meta"><span class="chip">den 34–40°</span><span class="chip">noc ~19–24°</span><span class="chip">200 m</span></div>
+        <p>Nejjasnější obloha celého pásu — <b>ale</b> 15–20 dní v&nbsp;srpnu přes 35&nbsp;°C a&nbsp;dusné noci. Na spaní v&nbsp;autě nejhorší volba; sem jedině s&nbsp;klimatizovaným ubytováním.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="divide">
+
+<!-- MAPA -->
+<section id="mapa">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Schematická mapa</div>
+      <h2>Kudy vede pás totality</h2>
+      <p class="sub">Zlatý pruh = pás úplného zatmění (tečkovaně střed s&nbsp;nejdelší tmou). Barvy měst značí šanci na jasnou oblohu. Madrid leží těsně pod jižní hranou — proto se musí na sever.</p>
+    </div>
+
+    <div class="map-frame">
+      <svg viewBox="0 0 1000 646" role="img" aria-label="Schematická mapa pásu totality zatmění Slunce 12. srpna 2026 přes severní Španělsko, s vyznačením měst, oblastí s dobrým počasím a tras z Madridu.">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0a0e2c"/>
+            <stop offset="0.62" stop-color="#141a44"/>
+            <stop offset="1" stop-color="#3a2b4e"/>
+          </linearGradient>
+          <radialGradient id="glow" cx="0.28" cy="1.02" r="0.7">
+            <stop offset="0" stop-color="#ff9a4a" stop-opacity="0.5"/>
+            <stop offset="0.5" stop-color="#ff7d3a" stop-opacity="0.14"/>
+            <stop offset="1" stop-color="#ff7d3a" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="sung" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0" stop-color="#fff0cf"/><stop offset="0.5" stop-color="#ffc061"/>
+            <stop offset="1" stop-color="#ffc061" stop-opacity="0"/>
+          </radialGradient>
+          <marker id="ah-gold" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ffc061"/></marker>
+          <marker id="ah-green" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#57cf8a"/></marker>
+          <marker id="ah-red" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ef7256"/></marker>
+          <marker id="ah-cyan" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7fd0ff"/></marker>
+        </defs>
+
+        <rect x="0" y="0" width="1000" height="646" fill="url(#sky)"/>
+        <rect x="0" y="470" width="1000" height="176" fill="url(#glow)"/>
+
+        <!-- geo orientace -->
+        <g fill="#8b93bd" font-family="ui-monospace,Menlo,monospace" font-size="12" opacity="0.55" letter-spacing="0.5">
+          <text x="40" y="250">A T L A N T I K</text>
+          <text x="470" y="34">Kantaberské moře</text>
+          <text x="812" y="600" fill="#c9a06a" opacity="0.8">Středozemní m.</text>
+          <text x="930" y="150" text-anchor="end">FRANCIE</text>
+        </g>
+        <!-- kompas -->
+        <g transform="translate(946,54)" opacity="0.85">
+          <line x1="0" y1="14" x2="0" y2="-8" stroke="#cdd3f0" stroke-width="1.6"/>
+          <path d="M0,-14 L4,-5 L-4,-5 Z" fill="#cdd3f0"/>
+          <text x="0" y="30" text-anchor="middle" fill="#cdd3f0" font-family="ui-monospace,monospace" font-size="12">S</text>
+        </g>
+
+        <!-- PÁS TOTALITY -->
+        <path d="M 70 55 C 180 85 250 100 305 122 C 380 150 430 195 472 238 C 545 285 585 300 642 332 C 740 388 835 470 905 545"
+              fill="none" stroke="#ffc061" stroke-opacity="0.13" stroke-width="272" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 70 55 C 180 85 250 100 305 122 C 380 150 430 195 472 238 C 545 285 585 300 642 332 C 740 388 835 470 905 545"
+              fill="none" stroke="#ffe0a8" stroke-opacity="0.75" stroke-width="1.6" stroke-dasharray="1.5 9" stroke-linecap="round"/>
+
+        <!-- highlight zóny -->
+        <g fill="none">
+          <ellipse cx="360" cy="224" rx="96" ry="62" stroke="#ffc061" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.85"/>
+          <ellipse cx="665" cy="272" rx="58" ry="52" stroke="#57cf8a" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.9"/>
+        </g>
+        <text x="196" y="238" fill="#ffc061" font-family="ui-monospace,monospace" font-size="11.5" font-weight="700">Meseta: jasno + dlouhá tma</text>
+        <text x="665" y="212" text-anchor="middle" fill="#57cf8a" font-family="ui-monospace,monospace" font-size="11.5" font-weight="700">nejjistější jasno</text>
+        <text x="665" y="227" text-anchor="middle" fill="#ffb36b" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700">ale vedro 34°+</text>
+
+        <!-- úniková zóna: pobřeží → Meseta -->
+        <g stroke-linecap="round" fill="none">
+          <path d="M 300 138 L 306 176" stroke="#7fd0ff" stroke-width="2.8" opacity="0.95" marker-end="url(#ah-cyan)"/>
+        </g>
+        <g font-family="ui-monospace,monospace" font-size="10.5" font-weight="600">
+          <text x="316" y="150" fill="#bfe6ff">únik ~1,5 h</text>
+          <text x="150" y="332" fill="#f3b6a6">pobřeží: zážitek, ale mraky</text>
+          <text x="531" y="266" text-anchor="middle" fill="#bfe6ff">chladné noci ~13°</text>
+        </g>
+
+        <!-- MĚSTA -->
+        <!-- pobřeží (riziko) -->
+        <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12.5">
+          <g fill="#ef7256">
+            <circle cx="103" cy="105" r="4.5"/><circle cx="301" cy="90" r="4.5"/><circle cx="287" cy="109" r="4"/>
+            <circle cx="435" cy="99" r="4.5"/><circle cx="498" cy="120" r="4"/>
+          </g>
+          <g fill="#f2b4a6">
+            <text x="112" y="102">A Coruña</text>
+            <text x="301" y="79" text-anchor="middle">Gijón</text>
+            <text x="252" y="123" text-anchor="end">Oviedo</text>
+            <text x="435" y="86" text-anchor="middle">Santander</text>
+            <text x="506" y="124">Bilbao <tspan fill="#c98" font-size="10">(okraj)</tspan></text>
+          </g>
+        </g>
+
+        <!-- vnitrozemí (dobré) -->
+        <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12.5">
+          <g fill="#57cf8a">
+            <circle cx="307" cy="192" r="6"/><circle cx="382" cy="256" r="4.5"/>
+            <circle cx="442" cy="220" r="4.5"/><circle cx="369" cy="295" r="4.5"/>
+            <circle cx="531" cy="283" r="4.5"/><circle cx="532" cy="206" r="4.5"/>
+          </g>
+          <!-- top picks = prstenec -->
+          <g fill="#57cf8a"><circle cx="646" cy="295" r="6"/><circle cx="680" cy="242" r="5"/></g>
+          <g fill="none" stroke="#9defbe" stroke-width="1.3"><circle cx="646" cy="295" r="10"/><circle cx="307" cy="192" r="10.5"/><circle cx="531" cy="283" r="10"/></g>
+
+          <g fill="#bff0d3">
+            <text x="291" y="196" text-anchor="end">León</text>
+            <text x="382" y="273" text-anchor="middle">Palencia</text>
+            <text x="456" y="217">Burgos</text>
+            <text x="357" y="311" text-anchor="end">Valladolid</text>
+            <text x="531" y="306" text-anchor="middle">Soria</text>
+            <text x="543" y="204">Logroño</text>
+            <text x="660" y="296">Zaragoza</text>
+            <text x="691" y="240">Huesca</text>
+          </g>
+        </g>
+
+        <!-- hrana / mimo -->
+        <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12.5">
+          <g fill="none" stroke="#c7cdec" stroke-width="1.6"><circle cx="413" cy="370" r="4.5"/><circle cx="866" cy="323" r="4.5"/></g>
+          <g fill="#b7c0e6" opacity="0.75"><circle cx="682" cy="531" r="3.6"/><circle cx="900" cy="520" r="3.6"/></g>
+          <g fill="#c7cdec">
+            <text x="422" y="374">Segovia <tspan fill="#9aa" font-size="10">(na hraně)</tspan></text>
+            <text x="866" y="311" text-anchor="middle" opacity="0.8">Barcelona <tspan fill="#889" font-size="10">(mimo)</tspan></text>
+          </g>
+          <g fill="#9aa4cc" font-size="11.5" opacity="0.85">
+            <text x="682" y="547" text-anchor="middle">Valencia · Slunce ~4°</text>
+            <text x="900" y="536" text-anchor="middle">Palma ~2°</text>
+          </g>
+        </g>
+
+        <!-- MADRID start -->
+        <g>
+          <path d="M442,410 l4.2,9.2 10.1,0.9 -7.6,6.7 2.3,9.9 -9-5.3 -9,5.3 2.3-9.9 -7.6-6.7 10.1-0.9 z" fill="#fff" stroke="#0a0e2c" stroke-width="0.6"/>
+          <text x="442" y="450" text-anchor="middle" fill="#ffffff" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" font-weight="700">Madrid · start i návrat</text>
+        </g>
+
+        <!-- legenda -->
+        <g transform="translate(40,486)" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12">
+          <rect x="-8" y="-16" width="292" height="128" rx="10" fill="#0a0e2c" fill-opacity="0.55" stroke="#ffffff" stroke-opacity="0.12"/>
+          <g><circle cx="4" cy="2" r="4.5" fill="#57cf8a"/><text x="16" y="6" fill="#dfe3f5">Dobrá šance na jasno (vnitrozemí)</text></g>
+          <g><circle cx="4" cy="24" r="4.5" fill="#ef7256"/><text x="16" y="28" fill="#dfe3f5">Pobřeží — zážitek, ale nejvíc mraků</text></g>
+          <g><circle cx="4" cy="46" r="4.5" fill="none" stroke="#c7cdec" stroke-width="1.6"/><text x="16" y="50" fill="#dfe3f5">Na hraně / mimo pás</text></g>
+          <g><rect x="-1" y="64" width="10" height="10" rx="2" fill="#ffc061" fill-opacity="0.3"/><text x="16" y="72" fill="#dfe3f5">Pás totality (tečka = střed)</text></g>
+          <g><line x1="0" y1="90" x2="9" y2="90" stroke="#7fd0ff" stroke-width="2.8"/><text x="16" y="94" fill="#dfe3f5">Úniková zóna: pobřeží → Meseta (~1,5 h)</text></g>
+        </g>
+      </svg>
+    </div>
+    <p class="map-cap">Mapa je schématická — pro přesné časy a hranici na metr použijte interaktivní mapy v sekci Odkazy (Jubier, timeanddate).</p>
+  </div>
+</section>
+
+<hr class="divide">
+
+<!-- VARIANTY -->
+<section id="varianty">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Čtyři varianty kam vyrazit</div>
+      <h2>Vyberte podle povahy — a hlavně podle předpovědi</h2>
+      <p class="sub">Řazeno podle toho, co dává smysl pro vás: <b>moře × jistota × délka tmy</b>. „Šance na jasno" vychází z klimatologie oblačnosti pro tento srpnový večer; délka a čas jsou pro dané město.</p>
+    </div>
+
+    <div class="cards">
+      <!-- A: pobřeží + úniková zóna -->
+      <article class="card rec">
+        <span class="stripe"></span>
+        <span class="tag rec">★ Pro vás nejlepší</span>
+        <h3>A · Pobřeží Asturie<br>Ribadesella / Llanes</h3>
+        <div class="meta">
+          <span class="chip">moře = zážitek</span>
+          <span class="chip">totalita ~1:45</span>
+          <span class="chip">noc ~17° 🟢</span>
+          <span class="chip">🔴 mraky → plán B</span>
+        </div>
+        <p>Totalita při západu <b>nad Kantaberským mořem</b> — Měsíční stín se přižene přes vodu. Gijón/Oviedo/Ribadesella mají navíc jednu z&nbsp;<b>nejdelších tem</b> (1:45–1:48). Slunce nízko nad hladinou, a&nbsp;právě proto je mořský obzor výhoda: voda dá čistou linku k&nbsp;nízkému Slunci.</p>
+        <ul>
+          <li><b>Místa s čistým Z–SZ obzorem nad vodou:</b> Ribadesella (útesy „bufones" vých. od města), Llanes (promenáda San Pedro, vyhlídka Boriza u&nbsp;Andrín–Ballota), Cabo Peñas.</li>
+        </ul>
+        <div class="callout"><b>Pojistka:</b> pobřeží je nejoblačnější část pásu (~60&nbsp;%). Když to ráno vypadá zataženo, sjeďte <b>~1,5&nbsp;h na jih na Mesetu</b> (León/Palencia) — jasno skoro jisté, tma stejně dlouhá.</div>
+        <p class="kids"><b>Pro dítě:</b> Picos de Europa (lanovka Fuente Dé), pláže, jeskyně, akvárium v&nbsp;Gijónu.</p>
+      </article>
+
+      <!-- B: León / Meseta -->
+      <article class="card max">
+        <span class="stripe"></span>
+        <span class="tag max">Dlouhá tma + jistota</span>
+        <h3>B · León<br>severní Meseta</h3>
+        <div class="meta">
+          <span class="chip">totalita ~1:45</span>
+          <span class="chip">noc ~14° 🟢</span>
+          <span class="chip">🟢 spolehlivo</span>
+          <span class="chip">= záloha var. A</span>
+        </div>
+        <p>Blízko středu pásu → tma až <b>1:45</b>, a&nbsp;Meseta má dobré počasí (68–78&nbsp;% slunce; jasné zatmění vyšlo 17 z&nbsp;21 let). Rovina = snadný čistý obzor. Vysoká poloha (~840&nbsp;m) drží <b>noci chladné (~14&nbsp;°C)</b>, i&nbsp;když dny bývají horké. Bonus: leží ~1,5&nbsp;h jižně od asturského pobřeží, takže je to zároveň <b>úniková zóna</b> varianty A.</p>
+        <p class="kids"><b>Pro dítě:</b> katedrála v&nbsp;Leónu (vitráže), Laguna de la Nava (ptáci), Atapuerca u&nbsp;Burgosu.</p>
+      </article>
+
+      <!-- C: Soria / Sistema Ibérico -->
+      <article class="card sky">
+        <span class="stripe"></span>
+        <span class="tag sky">Chládek + jasno</span>
+        <h3>C · Soria<br>Sistema Ibérico</h3>
+        <div class="meta">
+          <span class="chip">totalita ~1:42</span>
+          <span class="chip">noc ~13° 🟢</span>
+          <span class="chip">1050 m</span>
+          <span class="chip">🟢 73 % jasno</span>
+        </div>
+        <p>Pro rodinu spící v&nbsp;autě ideál: <b>chladné noci</b> (~13&nbsp;°C, klidně pod 10) díky výšce, k&nbsp;tomu <b>dobrá obloha</b> (73&nbsp;% slunečního svitu) a&nbsp;je <b>přímo v&nbsp;pásu</b> (tma 1:42). Kolem borové lesy, kaňony a&nbsp;jezera na ochlazení.</p>
+        <ul>
+          <li><b>Chladná základna:</b> Pinares (Vinuesa, Laguna Negra ~1100&nbsp;m), Cañón del Río Lobos.</li>
+          <li><b>Obzor:</b> vyjeďte na otevřené páramo se Z–SZ výhledem — kopce jinak nízké Slunce zakryjí.</li>
+        </ul>
+        <p class="kids"><b>Pro dítě:</b> jezero Laguna Negra, kaňon Río Lobos (supi), koupání v&nbsp;řekách. Nejjasnější, ale horké Ebro/Zaragoza (Acuario!) je hned na východ — jen s&nbsp;klimatizací.</p>
+      </article>
+
+      <!-- D: Galicie / Finisterre -->
+      <article class="card coast">
+        <span class="stripe"></span>
+        <span class="tag coast">Atlantská romantika</span>
+        <h3>D · Galicie<br>A Coruña / Finisterre</h3>
+        <div class="meta">
+          <span class="chip">atlantský západ</span>
+          <span class="chip">totalita ~1:16</span>
+          <span class="chip">noc ~16° 🟢</span>
+          <span class="chip">🔴 daleko + mraky</span>
+        </div>
+        <p>Kde stín ve Španělsku <b>poprvé dopadne z Atlantiku</b>. Costa da Morte a&nbsp;Fisterra („konec světa") mají západy nad otevřeným oceánem přímo na západ a&nbsp;Slunce o&nbsp;něco výš nad obzorem.</p>
+        <div class="callout"><b>Ale:</b> totalita krátká (1:16), počasí atlantsky nejisté a&nbsp;je to nejdál — a&nbsp;daleko od únikové Mesety. Spíš pro romantiku než pro jistotu.</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="divide">
+
+<!-- DETAIL OBLASTÍ -->
+<section id="detail">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Tři oblasti detailně</div>
+      <h2>Soria, Picos a pobřeží — do hloubky</h2>
+      <p class="sub">U&nbsp;každé: počasí a&nbsp;chládek, jak je to se zatměním a&nbsp;obzorem, co s&nbsp;dětmi, <b>konkrétní pozorovací body s&nbsp;GPS</b> a&nbsp;<b>místa na spaní</b>. Vaše finta platí: <b>spěte v&nbsp;chládku a&nbsp;na den D popojeďte tam, kde bude jasno a&nbsp;volný obzor.</b></p>
+    </div>
+
+    <div class="callout info"><b>📍 K pozorovacím bodům:</b> Slunce bude ~8° nad obzorem ve směru <b>ZSZ (~285–290°)</b>. Body níže mají volný západní obzor (moře / voda / otevřená pláň) podle oficiálních průvodců — ale posledních 100&nbsp;m rozhoduje: na místě si směr potvrďte v&nbsp;<b>PhotoPills / PeakFinder</b> a&nbsp;mějte záložní bod. Přijeďte brzy (kolony, dav); kempy ověřte v&nbsp;Park4Night.</div>
+
+    <div class="areas">
+
+      <!-- SORIA -->
+      <article class="area soria">
+        <div class="area-head">
+          <div class="area-tag">★ Chládek + jasno · nejjistější kombinace</div>
+          <h3>Soria &amp; Sistema Ibérico</h3>
+          <p class="area-lead">Vysoká vrchovina (~1050&nbsp;m) s&nbsp;borovými lesy, ledovcovými jezery a&nbsp;kaňony. Chladné noci, dobrá obloha, přímo v&nbsp;pásu totality — a&nbsp;nejblíž Madridu (pohodový i&nbsp;páteční návrat).</p>
+          <div class="meta">
+            <span class="chip">totalita ~1:42</span>
+            <span class="chip">noc ~13° 🟢</span>
+            <span class="chip">73 % jasno</span>
+            <span class="chip">~1050 m</span>
+            <span class="chip">~2,5 h z Madridu</span>
+          </div>
+        </div>
+        <div class="area-grid">
+          <div class="block">
+            <h4>Počasí &amp; chládek</h4>
+            <p>Den ~28–30&nbsp;°C (v&nbsp;lese a&nbsp;u&nbsp;vody snesitelné), <b>noc ~13&nbsp;°C</b>, klidně pod 10. Nízká oblačnost (73&nbsp;% slunce), jen občas odpolední bouřka — sledujte radar. Nejchladnější vnitrozemská volba na spaní.</p>
+          </div>
+          <div class="block">
+            <h4>Zatmění odtud</h4>
+            <p>Totalita ~20:29, <b>~1:42</b>. Kopce Sistema Ibérico můžou nízké Slunce (~8°) zaclonit — postavte se na <b>otevřené páramo</b> nebo na <b>západní břeh přehrady</b> Cuerda del Pozo. Azimut ~288° si ověřte v&nbsp;PhotoPills.</p>
+          </div>
+          <div class="block">
+            <h4>Pro děti</h4>
+            <p>Playa Pita (písečná „pláž" u&nbsp;přehrady ve výšce — koupání v&nbsp;chládku), Laguna Negra (ledovcové jezero, krátká procházka), Cañón del Río Lobos (supi), zřícenina Numancia.</p>
+          </div>
+          <div class="block">
+            <h4>Logistika</h4>
+            <p>Nejblíž ze tří (~2,5&nbsp;h z&nbsp;Madridu), takže i&nbsp;pátek v&nbsp;pohodě. K&nbsp;moři je to odtud daleko (~4&nbsp;h) — Soria je „commit" varianta, ne kombinace s&nbsp;pobřežím.</p>
+          </div>
+        </div>
+        <div class="block spots-block obs">
+          <h4>📍 Kde přesně pozorovat (GPS · volný obzor na ZSZ)</h4>
+          <ul class="spots">
+            <li><b>Numancia / Garray</b> <span class="why">— návrší se širokým výhledem (oficiálně vybraný bod), ~10&nbsp;min od Sorie.</span> <span class="gps">41.814, −2.448</span> <a href="https://www.google.com/maps/search/Numancia+Garray">mapa</a></li>
+            <li><b>Monte Valonsadero</b> <span class="why">— otevřená dehesa SZ od Sorie, snadný přístup, chladněji.</span> <span class="gps">≈ 41.823, −2.530</span> <a href="https://www.google.com/maps/search/Monte+Valonsadero+Soria">mapa</a></li>
+            <li><b>Calatañazor</b> <span class="why">— návrší s&nbsp;hradem a&nbsp;otevřeným sabinarem na západ; malebné.</span> <span class="gps">≈ 41.701, −2.822</span> <a href="https://www.google.com/maps/search/Calata%C3%B1azor+castillo">mapa</a></li>
+          </ul>
+        </div>
+        <div class="block spots-block">
+          <h4>🛏️ Kde spát s dětmi</h4>
+          <ul class="spots">
+            <li><b>Área autocaravan Vinuesa</b> — oficiální área u&nbsp;parku Laguna Negra, 50+ míst, 3–5&nbsp;€, bazén 200&nbsp;m. Levné a&nbsp;chladné. <a href="https://www.google.com/maps/search/%C3%81rea+autocaravanas+Vinuesa+Soria">mapa</a></li>
+            <li><b>Camping El Concurso</b> <span class="why">— borový les, 3&nbsp;km od Playa Pita, dost stínu.</span> <a href="https://www.google.com/maps/search/Camping+El+Concurso+Molinos+de+Duero">mapa</a></li>
+            <li><b>Camping Cobijo</b> (Vinuesa) <span class="why">— v&nbsp;lese, nejblíž k&nbsp;Laguna Negra.</span> <a href="https://www.google.com/maps/search/Camping+Cobijo+Vinuesa">mapa</a></li>
+            <li><b>Camping Urbión</b> (Covaleda) <span class="why">— u&nbsp;přehrady, bungalovy, bazén.</span> <a href="https://campingurbion.com">web</a></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- PICOS -->
+      <article class="area picos">
+        <div class="area-head">
+          <div class="area-tag">⛰️ Chladná horská základna · nejlepší pro hybrid</div>
+          <h3>Picos de Europa</h3>
+          <p class="area-lead">Národní park s&nbsp;vrcholy přes 2600&nbsp;m, roklemi a&nbsp;jezery. V&nbsp;noci příjemně chladno, přes den stín a&nbsp;voda. Ideální <b>základna</b>, odkud na den D vyrazíte za obzorem — moře 45&nbsp;min, otevřené vnitrozemí ~1,5&nbsp;h.</p>
+          <div class="meta">
+            <span class="chip">noc ~14–16° 🟢</span>
+            <span class="chip">hory a jezera</span>
+            <span class="chip">&lt;1 h k moři</span>
+            <span class="chip">obzor: popojet</span>
+          </div>
+        </div>
+        <div class="area-grid">
+          <div class="block">
+            <h4>Počasí &amp; chládek</h4>
+            <p>Údolí (Cangas de Onís ~80&nbsp;m) přes den teplá, ale výš (Covadonga, Fuente Dé ~1000&nbsp;m+) je chladno a&nbsp;noci svěží. Hory ale tvoří odpolední mraky a&nbsp;hlavně <b>cloní západní obzor</b>.</p>
+          </div>
+          <div class="block hybrid">
+            <h4>Zatmění odtud — pozor na obzor</h4>
+            <p>Vrcholy zakryjí nízké Slunce, takže <b>tady nepozorujte</b>. Berte Picos jako základnu a&nbsp;popojeďte: <b>~45&nbsp;min na sever k&nbsp;moři</b> (obzor nad vodou), nebo <b>~1,5&nbsp;h na jih</b> na otevřenou plošinu u&nbsp;Leónu / k&nbsp;přehradě Riaño (~1100&nbsp;m, chladno — ověřte západní obzor nad hladinou).</p>
+          </div>
+          <div class="block">
+            <h4>Pro děti</h4>
+            <p>Lagos de Covadonga (horská jezera), lanovka Fuente Dé, římský most a&nbsp;řeka Sella v&nbsp;Cangas de Onís, svatyně Covadonga. Spousta vody a&nbsp;stínu.</p>
+          </div>
+          <div class="block">
+            <h4>Logistika</h4>
+            <p>Centrální poloha — moře 45&nbsp;min, León/obzor ~1,5&nbsp;h. Nejlepší pro váš <b>hybrid</b> „spát v&nbsp;horách, zatmění tam, kde bude jasno". Na Madrid ~4,5&nbsp;h → v&nbsp;pátek couvejte přes León.</p>
+          </div>
+        </div>
+        <div class="block spots-block obs">
+          <h4>📍 Kde přesně pozorovat (Picos cloní — popojeďte)</h4>
+          <ul class="spots">
+            <li><b>Montaña de Riaño</b> <span class="why">— ~1100&nbsp;m, chladno, u&nbsp;přehrady (~1,5&nbsp;h). Oficiálně doporučeno; ověřte, že Picos na SZ nestíní.</span> <span class="gps">≈ 42.985, −5.001</span> <a href="https://www.google.com/maps/search/Mirador+de+Ria%C3%B1o">mapa</a></li>
+            <li><b>Otevřená pláň jižně od hor</b> <span class="why">— jistý volný obzor (~2&nbsp;h), když je Riaño zastíněný (Tierra de Campos / jih Leónu).</span> <span class="gps">≈ 42.62, −5.23</span> <a href="https://www.google.com/maps/search/Gradefes+Le%C3%B3n">mapa</a></li>
+            <li><b>…nebo 45&nbsp;min k moři</b> <span class="why">— na pobřežní body (viz oblast Pobřeží níže).</span></li>
+          </ul>
+        </div>
+        <div class="block spots-block">
+          <h4>🛏️ Kde spát s dětmi</h4>
+          <ul class="spots">
+            <li><b>Camping Covadonga</b> (Soto de Cangas) <span class="why">— nejrodinnější, hřiště, hodnocení 8,6 pro rodiny; u&nbsp;Cangas a&nbsp;Covadongy.</span> <a href="https://www.google.com/maps/search/Camping+Covadonga+Cangas+de+Onis">mapa</a></li>
+            <li><b>Camping Picos de Europa</b> (Avín) <span class="why">— horský kemp, travnaté parcely, plné přípojky.</span> <a href="https://www.google.com/maps/search/Camping+Picos+de+Europa+Av%C3%ADn">mapa</a></li>
+            <li><b>Camping La Isla</b> (Cangas de Onís) <span class="why">— u&nbsp;řeky Sella, klid.</span> <a href="https://www.google.com/maps/search/Camping+La+Isla+Cangas+de+Onis">mapa</a></li>
+            <li><b>Camping La Viorna</b> (Potes) <span class="why">— jižní strana, blíž k&nbsp;Leónu; bazén.</span> <a href="https://www.google.com/maps/search/Camping+La+Viorna+Potes">mapa</a></li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- POBŘEŽÍ -->
+      <article class="area coast">
+        <div class="area-head">
+          <div class="area-tag">🌊 Nejchladněji + zatmění nad mořem</div>
+          <h3>Pobřeží Asturie</h3>
+          <p class="area-lead">Zelené pobřeží s&nbsp;plážemi a&nbsp;útesy. Nejpříjemnější dny i&nbsp;noci z&nbsp;celého pásu a&nbsp;šance na totalitu při západu nad Kantaberským mořem. Daň: nejvíc mraků — proto ten hybrid s&nbsp;únikem do vnitrozemí.</p>
+          <div class="meta">
+            <span class="chip">totalita ~1:45</span>
+            <span class="chip">noc ~16–18° 🟢</span>
+            <span class="chip">den ~24–26°</span>
+            <span class="chip">🔴 mraky → plán B</span>
+          </div>
+        </div>
+        <div class="area-grid">
+          <div class="block">
+            <h4>Počasí &amp; chládek</h4>
+            <p>Oceánem chlazeno — den ~24–26&nbsp;°C, <b>noc ~16–18&nbsp;°C</b>, moře ~21&nbsp;°C. Nejlepší na spaní. Ale ~60&nbsp;% oblačnosti a&nbsp;nízké Slunce nad mořem cloní i&nbsp;opar. (Občasný „viento sur" přinese vedro <i>i</i>&nbsp;jasno.)</p>
+          </div>
+          <div class="block">
+            <h4>Zatmění odtud</h4>
+            <p>Totalita ~20:27, <b>~1:45</b>. Stůjte tam, kde je moře na <b>Z–SZ</b>: útesy s&nbsp;„bufones" vých. od Ribadeselly, Llanes (San Pedro, vyhlídka <b>Boriza</b> u&nbsp;Andrín), <b>Cabo Peñas</b>.</p>
+          </div>
+          <div class="block hybrid">
+            <h4>Váš hybrid: spát u moře, na den D do hor</h4>
+            <p>Spěte u&nbsp;moře, a&nbsp;když bude ve středu ráno na pobřeží zataženo, vyrazte kolem <b>16:00–17:00</b> do vnitrozemí za jasnem: ~1,5–2&nbsp;h na otevřenou plošinu u&nbsp;Leónu (jistý obzor) nebo k&nbsp;Riañu (chladné hory). Picos máte po cestě jako záložní základnu. Rozhodněte se do poledne podle radaru.</p>
+          </div>
+          <div class="block">
+            <h4>Pro děti</h4>
+            <p>Pláže (Santa Marina v&nbsp;Ribadeselle, Toró v&nbsp;Llanes), <b>Gulpiyuri</b> (mini pláž uprostřed louky), „bufones" (mořské gejzíry) a&nbsp;hlavně <b>MUJA — Museo del Jurásico</b> (dinosauři!) v&nbsp;Colunze.</p>
+          </div>
+        </div>
+        <div class="block spots-block obs">
+          <h4>📍 Kde přesně pozorovat (GPS · moře na ZSZ)</h4>
+          <ul class="spots">
+            <li><b>Faro de Cabo Peñas</b> (Gozón) <span class="why">— „úplně volný západní obzor, jedno z&nbsp;nejlepších míst"; totalita ~1:44. S&nbsp;dítětem pozor na útesy.</span> <span class="gps">43.657, −5.847</span> <a href="https://www.google.com/maps/search/Faro+de+Cabo+Pe%C3%B1as">mapa</a></li>
+            <li><b>Paseo de San Pedro, Llanes</b> <span class="why">— travnatá promenáda nad mořem, „nekonečný výhled na západ"; ve městě, snadné s&nbsp;dětmi.</span> <span class="gps">≈ 43.422, −4.757</span> <a href="https://www.google.com/maps/search/Paseo+de+San+Pedro+Llanes">mapa</a></li>
+            <li><b>Ribadesella — Mirador de Guía</b> <span class="why">— návrší nad ústím, volný obzor na moře; totalita ~1:35.</span> <span class="gps">≈ 43.463, −5.061</span> <a href="https://www.google.com/maps/search/Ermita+de+la+Gu%C3%ADa+Ribadesella">mapa</a></li>
+            <li><b>Alt.: Mirador de la Boriza</b> (Andrín) / <b>Playa de Torimbia</b> <span class="why">— obě orientovaná na západ.</span> <span class="gps">≈ 43.419, −4.813</span> <a href="https://www.google.com/maps/search/Mirador+de+la+Boriza+Andr%C3%ADn">mapa</a></li>
+          </ul>
+        </div>
+        <div class="block spots-block">
+          <h4>🛏️ Kde spát s dětmi</h4>
+          <ul class="spots">
+            <li><b>Camping La Paz</b> (Vidiago, Llanes) <span class="why">— terasy nad pláží, výhledy na moře i&nbsp;hory, u&nbsp;pláže. Nádherné.</span> <a href="https://campinglapaz.com">web</a></li>
+            <li><b>Camping Ribadesella</b> <span class="why">— „Nejrodinnější kemp Španělska 2019", bungalovy, klid.</span> <a href="https://camping-ribadesella.es">web</a></li>
+            <li><b>Camping Las Conchas de Poo</b> (Llanes) <span class="why">— u&nbsp;pláží Poo/Celorio, rodinné.</span> <a href="https://www.google.com/maps/search/Camping+Las+Conchas+de+Poo+Llanes">mapa</a></li>
+            <li><b>Camping Costa Verde</b> (Colunga) <span class="why">— u&nbsp;pláže a&nbsp;dinosauřího MUJA.</span> <a href="https://www.google.com/maps/search/Camping+Costa+Verde+Colunga">mapa</a></li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divide">
+
+<!-- TABULKA -->
+<section id="tabulka">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Data měst v pásu</div>
+      <h2>Časy, délka tmy, výška Slunce, počasí</h2>
+      <p class="sub">Čas = začátek totality v&nbsp;SELČ (částečná fáze začíná ~hodinu předtím). „V&nbsp;noci" = typické srpnové noční minimum (🟢 chladno na spaní · 🟡 vlažno · 🔴 dusno) — <b>výška srazí teplotu víc než „sever"</b>. „Vzdálenost" z&nbsp;Madridu platí i&nbsp;pro páteční návrat. Zvýrazněné řádky = 4&nbsp;varianty výše.</p>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Místo</th><th>Totalita začíná</th><th>Délka</th><th>Slunce</th><th>Šance na jasno</th><th>V noci (srpen)</th><th>Vzdálenost (i návrat)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="city">Segovia</td><td class="num">20:31</td><td class="num">0:59</td><td class="num">~9°</td><td class="wx"><span class="dot good"></span>dobré · ale na hraně</td><td class="num"><span class="dot good"></span>~15° · 1000 m</td><td class="num">~1:00 · 90 km</td></tr>
+          <tr><td class="city">Valladolid</td><td class="num">20:30</td><td class="num">1:28</td><td class="num">~9°</td><td class="wx"><span class="dot good"></span>velmi dobré</td><td class="num"><span class="dot good"></span>~15° · 700 m</td><td class="num">~2:00 · 215 km</td></tr>
+          <tr><td class="city">Palencia</td><td class="num">20:29</td><td class="num">1:42</td><td class="num">~8°</td><td class="wx"><span class="dot good"></span>velmi dobré</td><td class="num"><span class="dot good"></span>~14° · 740 m</td><td class="num">~2:20 · 240 km</td></tr>
+          <tr><td class="city">Burgos</td><td class="num">20:28</td><td class="num">1:43</td><td class="num">~8°</td><td class="wx"><span class="dot good"></span>velmi dobré</td><td class="num"><span class="dot good"></span>~13° · 860 m</td><td class="num">~2:30 · 245 km</td></tr>
+          <tr class="hi"><td class="city">Soria</td><td class="num">20:29</td><td class="num">1:42</td><td class="num">~8°</td><td class="wx"><span class="dot good"></span>dobré · kopcovité</td><td class="num"><span class="dot good"></span>~13° · 1050 m</td><td class="num">~2:30 · 230 km</td></tr>
+          <tr><td class="city">Zaragoza</td><td class="num">20:29</td><td class="num">1:24</td><td class="num">~7°</td><td class="wx"><span class="dot good"></span>nejlepší (&lt;30 % obl.)</td><td class="num"><span class="dot risk"></span>~20° · 200 m</td><td class="num">~3:15 · 325 km</td></tr>
+          <tr><td class="city">Logroño</td><td class="num">20:28</td><td class="num">1:21</td><td class="num">~8°</td><td class="wx"><span class="dot good"></span>dobré</td><td class="num"><span class="dot warn"></span>~17° · 380 m</td><td class="num">~3:20 · 335 km</td></tr>
+          <tr class="hi"><td class="city">León</td><td class="num">20:28</td><td class="num">1:45</td><td class="num">~8°</td><td class="wx"><span class="dot good"></span>velmi dobré</td><td class="num"><span class="dot good"></span>~14° · 840 m</td><td class="num">~3:20 · 335 km</td></tr>
+          <tr><td class="city">Huesca</td><td class="num">20:29</td><td class="num">~1:24</td><td class="num">~7°</td><td class="wx"><span class="dot good"></span>nejlepší</td><td class="num"><span class="dot warn"></span>~17° · 470 m</td><td class="num">~3:40 · 390 km</td></tr>
+          <tr class="hi"><td class="city">Gijón / Asturie</td><td class="num">20:27</td><td class="num">1:45</td><td class="num">~11°</td><td class="wx"><span class="dot risk"></span>vysoké riziko</td><td class="num"><span class="dot good"></span>~16° · u moře</td><td class="num">~4:30 · 450 km</td></tr>
+          <tr><td class="city">Oviedo</td><td class="num">20:27</td><td class="num">1:48</td><td class="num">~11°</td><td class="wx"><span class="dot risk"></span>vysoké riziko</td><td class="num"><span class="dot good"></span>~16° · 230 m</td><td class="num">~4:30 · 450 km</td></tr>
+          <tr><td class="city">Santander</td><td class="num">20:27</td><td class="num">1:03</td><td class="num">~10°</td><td class="wx"><span class="dot risk"></span>riziko (pobřeží)</td><td class="num"><span class="dot good"></span>~17° · u moře</td><td class="num">~4:00 · 390 km</td></tr>
+          <tr><td class="city">Bilbao</td><td class="num">20:27</td><td class="num">0:29</td><td class="num">~10°</td><td class="wx"><span class="dot warn"></span>okraj pásu + riziko</td><td class="num"><span class="dot warn"></span>~18° · u moře</td><td class="num">~4:00 · 400 km</td></tr>
+          <tr><td class="city">Valencia</td><td class="num">20:32</td><td class="num">1:00</td><td class="num">~4°</td><td class="wx"><span class="dot good"></span>dobré · Slunce nízko</td><td class="num"><span class="dot risk"></span>~23° · u moře</td><td class="num">~3:30 · 355 km</td></tr>
+          <tr class="hi"><td class="city">A Coruña</td><td class="num">20:28</td><td class="num">1:16</td><td class="num">~12°</td><td class="wx"><span class="dot risk"></span>riziko (pobřeží)</td><td class="num"><span class="dot good"></span>~16° · u moře</td><td class="num">~6:00 · 590 km</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="map-cap">Zdroj časů a délek: NationalEclipse / IGN; klimatologie oblačnosti: Eclipsophile (odkazy níže).</p>
+  </div>
+</section>
+
+<hr class="divide">
+
+<!-- ITINERÁŘ -->
+<section id="itinerar">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Den po dni</div>
+      <h2>Váš týden okolo zatmění</h2>
+      <p class="sub">Sladěno s&nbsp;vaším plánem: přílet v&nbsp;neděli, vůz v&nbsp;pondělí po obědě, zatmění ve středu, návrat a&nbsp;odlet v&nbsp;pátek. Na cestu na sever máte dva dny — <b>napjatější je návrat</b>.</p>
+    </div>
+    <div class="timeline">
+      <div class="t-row">
+        <div class="t-when"><span class="day">Neděle</span><span class="date">9. 8.</span></div>
+        <div class="t-body"><h3>Přílet do Madridu, hotel</h3><p>Večerní přesun na hotel, klidná noc. Nabít baterky (doslova) na týden v&nbsp;obytňáku.</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-when"><span class="day">Pondělí</span><span class="date">10. 8.</span></div>
+        <div class="t-body"><h3>Vyzvednutí Ford Nugget → velká etapa na sever</h3><p>Po obědě převzetí vozu, nákup zásob a&nbsp;vody, kontrola plynu. Se dvěma dny času klidně natáhněte trasu — přes odpolední šlofík a&nbsp;večer ujedete pořádný kus. Cíl dne: dostat se co nejblíž severu (třeba k&nbsp;Leónu). Cestou může padnout <b>Segovia</b> (akvadukt, pohádkový Alcázar).</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-when"><span class="day">Úterý</span><span class="date">11. 8.</span></div>
+        <div class="t-body"><h3>Sever: Picos de Europa a asturské pobřeží</h3><p>Dojezd až k&nbsp;moři. Užijte si sever — pláže, lanovka Fuente Dé, jeskyně. Najděte a&nbsp;„osahejte" pozorovací místo s&nbsp;<b>mořským Z–SZ obzorem</b> (Ribadesella, Llanes, Cabo Peñas). Sledujte předpověď oblačnosti (AEMET, Windy).</p></div>
+      </div>
+      <div class="t-row eclipse">
+        <div class="t-when"><span class="day">Středa</span><span class="date">12. 8. · den D</span></div>
+        <div class="t-body"><h3>🌑 Zatmění — rozhoduje předpověď</h3><p>Ráno poslední pohled na oblačnost. <b>Jasno u&nbsp;moře</b> → zůstaňte na pobřežní vyhlídce (totalita ~20:27, ~1:45, nad hladinou). <b>Mraky</b> → skok ~1,5&nbsp;h dolů na Mesetu (León/Palencia) k&nbsp;jistému jasnu. Na místo <b>s&nbsp;předstihem 2–3 h</b> (pak bývají kolony). Brýle dolů jen během totality!</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-when"><span class="day">Čtvrtek</span><span class="date">13. 8.</span></div>
+        <div class="t-body"><h3>⚠️ Začněte couvat na jih</h3><p>Nenechávejte celý návrat na pátek. Cestou si užijte Picos nebo <b>León</b> (katedrála) a&nbsp;přespěte někde kolem Leónu/Valladolidu — ať je pátek krátký. (Z&nbsp;pobřeží do Madridu je to 4,5–6&nbsp;h.)</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-when"><span class="day">Pátek</span><span class="date">14. 8.</span></div>
+        <div class="t-body"><h3>Návrat vozu a odlet</h3><p>Zbytek cesty do Madridu, <b>vrácení Nuggetu s&nbsp;rezervou</b> (tankování do plna, úklid), odpolední let domů. Z&nbsp;Mesety pohodové — nechte dost času na vrácení vozu + cestu na letiště.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divide">
+
+<!-- DEN D -->
+<section id="dend">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Den D · středa 12. 8.</div>
+      <h2>Časová osa a checklist</h2>
+      <p class="sub">Časy jsou orientační pro sever Španělska — přesný čas pro vaše místo si ověřte na interaktivní mapě (Jubier / timeanddate). Zlaté pravidlo: <b>brýle dolů jen během totality.</b></p>
+    </div>
+
+    <div class="timeline">
+      <div class="t-row">
+        <div class="t-when"><span class="day">~13:00</span><span class="date">rozhodnutí</span></div>
+        <div class="t-body"><h3>Poslední kontrola předpovědi</h3><p>AEMET + Windy (radar oblačnosti). Vyberte a&nbsp;<b>potvrďte místo</b>. Pokud přejíždíte za jasnem (pobřeží → hory), plánujte odjezd tak, abyste byli na místě s&nbsp;rezervou.</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-when"><span class="day">~16:00</span><span class="date">zásoby + výjezd</span></div>
+        <div class="t-body"><h3>Natankovat, doplnit vodu, vyrazit</h3><p>Plná nádrž, voda + led, brzká večeře pro dítě, svačiny. Vyrazte na místo — <b>dav a&nbsp;kolony</b>, proto raději brzy.</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-when"><span class="day">~17:30</span><span class="date">−3 h · na místě</span></div>
+        <div class="t-body"><h3>Zabrat místo a rozložit se</h3><p>2–3&nbsp;h před totalitou jste tam. V&nbsp;<b>PhotoPills</b> potvrďte, že azimut ~288° je volný. Rozložte židle, stín, deku. Kde je záchod? Kde záložní bod?</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-when"><span class="day">~18:30</span><span class="date">klid před bouří</span></div>
+        <div class="t-body"><h3>Nachystat sebe i dítě</h3><p>Krém, čůrání, mikina a&nbsp;baterka po ruce. <b>Rozdejte brýle</b> a&nbsp;vyzkoušejte nanečisto. Dítěti připomeňte, co se bude dít.</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-when"><span class="day">~19:30</span><span class="date">C1 · začátek</span></div>
+        <div class="t-body"><h3>👓 Brýle na oči — první „kousnutí"</h3><p>Začíná částečná fáze. <b>Brýle po celou dobu na očích.</b> S&nbsp;dítětem: kontrola každých ~10&nbsp;min přes brýle; dírková projekce nebo stíny cedníku (půlměsíčky na zemi).</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-when"><span class="day">~20:10</span><span class="date">atmosféra houstne</span></div>
+        <div class="t-body"><h3>Světlo zešedne, ochladí se</h3><p>Stříbrné světlo, ostré stíny, <b>„zatměnný vánek"</b> a&nbsp;chlad. Objeví se Venuše. Na bílé prostěradlo vyhlížejte těsně před totalitou „stínové vlny".</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-when"><span class="day">~20:27</span><span class="date">diamantový prsten</span></div>
+        <div class="t-body"><h3>Stín Měsíce se přiřítí</h3><p>Na západě (nad mořem) uvidíte přilétat stín. Baily's beads a&nbsp;<b>diamantový prsten</b> — a&nbsp;v&nbsp;okamžiku, kdy Slunce úplně zmizí, <b>BRÝLE DOLŮ</b>.</p></div>
+      </div>
+      <div class="t-row eclipse">
+        <div class="t-when"><span class="day">20:28–20:30</span><span class="date">🌑 TOTALITA ~1:42</span></div>
+        <div class="t-body"><h3>Buďte v tom</h3><p>Brýle dolů. <b>Koróna</b>, 360° soumrak na obzoru, hvězdy a&nbsp;planety. Žádné vrtání do foťáku — dívejte se. Dítěti: „koukej na <b>černé Sluníčko</b>!" (Maximálně jedna rychlá fotka.)</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-when"><span class="day">~20:30</span><span class="date">C3 · konec totality</span></div>
+        <div class="t-body"><h3>👓 Brýle hned zpátky!</h3><p>Na druhé straně vyskočí diamantový prsten — <b>okamžitě nasaďte brýle</b>. I&nbsp;úzký srpek Slunce spálí oči.</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-when"><span class="day">po 20:30</span><span class="date">západ + noc</span></div>
+        <div class="t-body"><h3>Dozatmívání a klid</h3><p>Slunce zapadá ještě částečně zakryté — užijte si barvy. <b>Nechte dav rozjet</b>, vy přespíte na místě nebo kousek vedle a&nbsp;vyrazíte ráno. (Ve čtvrtek začněte couvat na jih k&nbsp;Madridu.)</p></div>
+      </div>
+    </div>
+
+    <h3 class="cl-title">🎒 Co sbalit a mít u auta</h3>
+    <div class="checklist">
+      <div class="cl-cat">
+        <h4>👓 Oči &amp; bezpečnost</h4>
+        <ul>
+          <li><label><input type="checkbox"> Brýle ISO 12312-2 (každý + náhradní)</label></li>
+          <li><label><input type="checkbox"> Dětská velikost brýlí</label></li>
+          <li><label><input type="checkbox"> Solární filtr na foťák/dalekohled (jinak NE)</label></li>
+          <li><label><input type="checkbox"> Běžné sluneční brýle (na Slunce nestačí!)</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>🌡️ Teplo &amp; tma</h4>
+        <ul>
+          <li><label><input type="checkbox"> Mikina/fleece pro každého</label></li>
+          <li><label><input type="checkbox"> Deka (během totality se ochladí)</label></li>
+          <li><label><input type="checkbox"> Čelovka / baterka na potmě</label></li>
+          <li><label><input type="checkbox"> Powerbanka</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>🥪 Jídlo &amp; pohodlí</h4>
+        <ul>
+          <li><label><input type="checkbox"> Hodně vody + led</label></li>
+          <li><label><input type="checkbox"> Brzká večeře + svačiny</label></li>
+          <li><label><input type="checkbox"> Kempová židle, deka</label></li>
+          <li><label><input type="checkbox"> Stín (slunečník/markýza), klobouky, krém</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>📱 Technika &amp; navigace</h4>
+        <ul>
+          <li><label><input type="checkbox"> Nabitý telefon</label></li>
+          <li><label><input type="checkbox"> PhotoPills / PeakFinder</label></li>
+          <li><label><input type="checkbox"> Offline mapa (signál bývá přetížený)</label></li>
+          <li><label><input type="checkbox"> Stativ (fotíte-li; mimo totalitu jen s filtrem)</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>🧒 Pro dítě</h4>
+        <ul>
+          <li><label><input type="checkbox"> Hračka/aktivita na hodinu částečné fáze</label></li>
+          <li><label><input type="checkbox"> Cedník / dírková projekce (stíny půlměsíčků)</label></li>
+          <li><label><input type="checkbox"> Odpolední šlofík proběhl</label></li>
+          <li><label><input type="checkbox"> Oblíbená deka/plyšák</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>🚐 Vůz &amp; místo</h4>
+        <ul>
+          <li><label><input type="checkbox"> Plná nádrž (natankováno předem)</label></li>
+          <li><label><input type="checkbox"> Hotovost (venkov)</label></li>
+          <li><label><input type="checkbox"> Pytel na odpadky (nenech stopy)</label></li>
+          <li><label><input type="checkbox"> Vytipovaný záložní pozorovací bod</label></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divide">
+
+<!-- TIPY -->
+<section id="tipy">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Playbook na den D</div>
+      <h2>Praktické tipy — bezpečnost, dítě, obzor, doprava</h2>
+    </div>
+    <div class="tips">
+      <div class="tip danger">
+        <h3><span class="ic">👓</span> Oči — nekompromisně</h3>
+        <p>Certifikované brýle na zatmění <b>ISO 12312-2</b> pro každého (i&nbsp;dětská velikost). Noste je po <b>celou částečnou fázi</b>. Sundat je smíte <b>jen během totality</b> — těch ~1,5 minuty úplného zakrytí. Jakmile se objeví první paprsek, hned zpět.</p>
+        <ul><li>Nikdy nekoukejte dalekohledem ani fotoaparátem <b>bez</b> solárního filtru — spálí oči i&nbsp;přes brýle.</li><li>Brýle kupte předem doma z&nbsp;ověřeného zdroje.</li></ul>
+      </div>
+      <div class="tip">
+        <h3><span class="ic">🧒</span> Se čtyřletým parťákem</h3>
+        <ul>
+          <li>Brýle si <b>vyzkoušejte předem doma</b> jako hru.</li>
+          <li>Odpoledne <b>šlofík</b> — totalita je až po (na české poměry pozdní) španělské večeři.</li>
+          <li>Během totality se <b>setmí a ochladí</b> → mikina/deka, baterka na potmě.</li>
+          <li>Nachystejte příběh: „Měsíček si na chviličku půjčí Sluníčko."</li>
+        </ul>
+      </div>
+      <div class="tip">
+        <h3><span class="ic">🌅</span> Volný obzor je král</h3>
+        <p>Slunce bude jen ~8–11° nad obzorem (na pobřeží výš, na jihovýchodě níž). Ověřte, že na <b>západ až severozápad (azimut ~285–290°)</b> nic nestíní — kopec, les, budova, dálniční násep.</p>
+        <ul><li><b>U moře:</b> stůjte tam, kde je na Z–SZ <b>moře</b>, ne mys nebo kopec — voda dá čistou linku k&nbsp;nízkému Slunci. Osvědčené: Ribadesella, Llanes (Boriza), Cabo Peñas.</li><li>Appky: <b>PhotoPills</b>, <b>Sun Surveyor</b>, <b>PeakFinder</b> — ukážou přesně, kudy Slunce zapadne.</li><li>Vnitrozemí: rovina Mesety nebo Ebra, mírné návrší s&nbsp;výhledem na západ.</li></ul>
+      </div>
+      <div class="tip">
+        <h3><span class="ic">🚗</span> Doprava a návrat</h3>
+        <p>Před i&nbsp;po zatmění bývají <b>kolony</b> — všichni se rozjedou naráz a&nbsp;potmě. Přijeďte s&nbsp;předstihem, po totalitě nikam nespěchejte.</p>
+        <ul><li>Výhoda Nuggetu: prostě <b>přespíte na místě</b> a&nbsp;vyrazíte ráno.</li><li><b>Tvrdý termín je pátek</b> (vrácení vozu + let z&nbsp;Madridu) — ve čtvrtek už couvejte na jih, ať pátek není 6h štrek.</li></ul>
+      </div>
+      <div class="tip">
+        <h3><span class="ic">🛌</span> Spaní v obytňáku</h3>
+        <p>Místa na přespání: apky <b>Park4Night</b> a&nbsp;<b>Campercontact</b> (áreas de autocaravanas). V&nbsp;noc zatmění se populární spoty <b>zaplní</b> — přijeďte brzy nebo rezervujte kemp.</p>
+        <ul><li>„Parkování" přes noc se toleruje víc než rozložený „kemping" (židle, markýza).</li></ul>
+      </div>
+      <div class="tip">
+        <h3><span class="ic">🥵</span> Vedro a spaní v chládku</h3>
+        <p>Srpen ve vnitrozemí = klidně <b>35 °C+</b> a&nbsp;dusné noci v&nbsp;nížině. Klíč: <b>spěte ve výšce nebo u&nbsp;moře</b> (viz sekce Vedro výše).</p>
+        <ul>
+          <li>Přes den <b>siesta ve stínu / v&nbsp;horách</b> u&nbsp;vody; delší přejezdy klidně na noční chládek.</li>
+          <li>Vůz do stínu, pop-top nahoru, sítě proti hmyzu = průvan v&nbsp;noci.</li>
+          <li>Vyhněte se přespání v&nbsp;<b>Ebru (Zaragoza)</b> a&nbsp;jižních nížinách — noci ~20–24&nbsp;°C.</li>
+          <li>Hodně vody, krém, klobouky; palivo a&nbsp;zásoby doplňte dopředu.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divide">
+
+<!-- ODKAZY -->
+<section id="odkazy">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Odkazy a zdroje</div>
+      <h2>Co si projít před cestou</h2>
+      <p class="sub">Nejdůležitější jsou <b>interaktivní mapy</b> (klikněte na konkrétní místo → přesné časy) a&nbsp;<b>předpověď oblačnosti</b> pár dní předem.</p>
+    </div>
+    <div class="src-grid">
+      <div class="src">
+        <h3>Interaktivní mapy</h3>
+        <ul>
+          <li><a href="http://xjubier.free.fr/en/site_pages/solar_eclipses/TSE_2026_GoogleMapFull.html">Xavier Jubier — interaktivní mapa</a><span class="note">Klikněte kamkoli a dostanete přesné časy a délku totality. Etalon mezi lovci zatmění.</span></li>
+          <li><a href="https://www.timeanddate.com/eclipse/map/2026-august-12">timeanddate — mapa + průměrná oblačnost</a><span class="note">Zoom až na ulice, porovnání oblačnosti, uložení míst.</span></li>
+          <li><a href="https://www.timeanddate.com/eclipse/globe/2026-august-12">timeanddate — 3D glóbus dráhy stínu</a></li>
+          <li><a href="https://www.spainsolareclipse.com/map/">Spain Solar Eclipse — mapa pro Španělsko</a></li>
+        </ul>
+      </div>
+      <div class="src">
+        <h3>Předpověď počasí (rozhoduje!)</h3>
+        <ul>
+          <li><a href="https://eclipsophile.com/tse2026/">Eclipsophile — klimatologie oblačnosti</a><span class="note">Nejlepší rozbor, kde je statisticky největší šance na jasno.</span></li>
+          <li><a href="https://www.windy.com">Windy.com — předpověď oblačnosti</a><span class="note">Pár dní předem porovnejte modely (ICON, ECMWF).</span></li>
+          <li><a href="https://www.aemet.es">AEMET — španělská meteo služba</a></li>
+        </ul>
+      </div>
+      <div class="src">
+        <h3>Slunce, stíny a obzor (ověření místa)</h3>
+        <ul>
+          <li><a href="https://www.suncalc.org">SunCalc</a><span class="note">Kudy a v kolik Slunce zapadá pro dané místo (azimut i výška nad obzorem).</span></li>
+          <li><a href="https://app.shadowmap.org">ShadowMap</a><span class="note">3D stíny terénu v čase — uvidíte, jestli kopec/les zakryje nízké Slunce.</span></li>
+          <li><a href="https://app.photoephemeris.com">The Photographer's Ephemeris</a><span class="note">Směr západu Slunce nad mapou — přesná kontrola volného Z–SZ obzoru.</span></li>
+          <li><a href="https://www.peakfinder.org">PeakFinder</a><span class="note">Panorama obzoru — pojmenuje hřebeny, které by mohly clonit.</span></li>
+          <li><a href="https://stellarium-web.org">Stellarium Web</a><span class="note">Co bude na nebi během totality (Venuše, planety, hvězdy).</span></li>
+          <li><a href="https://www.photopills.com/articles/total-solar-eclipse-2026-photography-guide">PhotoPills — průvodce 2026</a> · <a href="https://petapixel.com/2026/08/06/this-photographer-built-an-app-to-capture-perfect-solar-eclipse-photos/">Umbra (appka)</a><span class="note">Plánovač zatmění, AR náhled a výpočet expozice; pomocníci na „den D".</span></li>
+        </ul>
+      </div>
+      <div class="src">
+        <h3>Oficiální a astronomické</h3>
+        <ul>
+          <li><a href="https://eclipses.ign.es/eclipse-total-sol-de-12-de-agosto-2026.html">IGN — oficiální stránka zatmění (ES)</a></li>
+          <li><a href="https://astronomia.ign.es/en/eclipses-de-sol-y-luna/eclipse-total-sol-de-12-de-agosto-2026">IGN — anglicky</a></li>
+          <li><a href="https://www.comunidad.madrid/trio-eclipses-2026-2027-2028">Comunidad de Madrid — trojice zatmění 2026–28</a></li>
+          <li><a href="https://nationaleclipse.com/cities/lists/2026-total-solar-eclipse-cities.html">NationalEclipse — časy pro města</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Solar_eclipse_of_August_12,_2026">Wikipedia — přehled zatmění (EN)</a></li>
+        </ul>
+      </div>
+      <div class="src">
+        <h3>Pobřeží a sever</h3>
+        <ul>
+          <li><a href="https://www.turismoasturias.es/en/-/asturias-uno-de-los-mejores-lugares-para-ver-el-eclipse-de-sol">Turismo Asturias — zatmění na pobřeží</a><span class="note">Oficiální tipy na místa v&nbsp;Asturii.</span></li>
+          <li><a href="https://absoluteeclipse.eu/blogs/where-to-watch/eclipse-2026-asturias">Absolute Eclipse — průvodce Asturií</a><span class="note">Kde a kdy, konkrétní vyhlídky nad mořem.</span></li>
+          <li><a href="https://roadsurfer.com/blog/camping-guides/top-places-spain-solar-eclipse/">roadsurfer — nejlepší místa s&nbsp;obytňákem</a></li>
+          <li><a href="https://www.google.com/maps/search/Picos+de+Europa+Fuente+D%C3%A9+teleferico">Picos de Europa — lanovka Fuente Dé</a><span class="note">Rodinný highlight severu.</span></li>
+        </ul>
+      </div>
+      <div class="src">
+        <h3>Obytňák, děti, bezpečnost</h3>
+        <ul>
+          <li><a href="https://www.park4night.com">Park4Night</a> · <a href="https://www.campercontact.com">Campercontact</a><span class="note">Ověřte konkrétní kempy a áreas z detailní sekce; o zatmění rezervujte nebo přijeďte brzy.</span></li>
+          <li><a href="https://www.exploratorium.edu/eclipse/2026-total-solar-eclipse-guide">Exploratorium — průvodce (bezpečnost očí)</a></li>
+          <li><a href="https://www.google.com/maps/search/Museo+del+Jur%C3%A1sico+de+Asturias+Colunga">MUJA — Muzeum jury (dinosauři), Colunga</a><span class="note">Hit pro čtyřletého na pobřeží.</span></li>
+          <li><a href="https://www.acuariodezaragoza.com">Acuario de Zaragoza</a><span class="note">Tip pro dítě, pokud padne varianta Ebro.</span></li>
+          <li><a href="https://www.google.com/maps/search/Barranco+Perdido+Enciso+La+Rioja">Barranco Perdido — dinopark, La Rioja</a><span class="note">Pokud zamíříte přes La Rioju (Logroño).</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Rodinný plán za totálním zatměním · 12. 8. 2026 · sever a pobřeží Španělska</span>
+    <span>Časy orientační — před cestou ověřte na interaktivní mapě a v předpovědi.</span>
+  </div>
+</footer>
+
+<script>
+  // jemné respektování přepínače motivu hostitele je řešeno přes data-theme v CSS; žádná další logika není potřeba.
+</script>
