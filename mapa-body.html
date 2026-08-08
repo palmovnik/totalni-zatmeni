@@ -9,20 +9,28 @@
   :root{--gold:#b4610b;--ink:#161b38;--panel:#ffffff;--line:#d9deef}
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink)}
-  #app{display:flex;flex-direction:column;height:100%}
-  header{padding:.55rem .8rem;background:#0e1330;color:#fff;display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center}
-  header h1{font-size:1rem;margin:0;font-weight:600;white-space:nowrap}
+  #app{display:flex;flex-direction:column;height:100vh;height:100dvh}
+  header{padding:.4rem .6rem;background:#0e1330;color:#fff;display:flex;flex-wrap:wrap;gap:.35rem .8rem;align-items:center}
+  header h1{font-size:.95rem;margin:0;font-weight:600;white-space:nowrap}
   header .sub{font-size:.78rem;color:#aab0d8}
-  .bar{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center}
-  .bar .grp{display:flex;flex-wrap:wrap;gap:.3rem;align-items:center}
-  button.reg{font:600 .8rem/1 system-ui;padding:.4rem .6rem;border-radius:999px;border:1px solid #3a4270;background:#1a2149;color:#e8 eaf7;color:#e8eaf7;cursor:pointer}
+  /* jednořádkové posuvné lišty — šetří výšku na mobilu */
+  .bar{display:flex;flex-wrap:nowrap;gap:.35rem;align-items:center;overflow-x:auto;
+       scrollbar-width:none;-webkit-overflow-scrolling:touch;max-width:100%}
+  .bar::-webkit-scrollbar{display:none}
+  .bar .grp{display:flex;flex-wrap:nowrap;gap:.3rem;align-items:center}
+  .iconbtn{flex:0 0 auto;font:600 .8rem/1 system-ui;padding:.4rem .55rem;border-radius:999px;
+           border:1px solid #3a4270;background:#1a2149;color:#e8eaf7;cursor:pointer}
+  .iconbtn:hover{background:#26305e}
+  .iconbtn.on{background:var(--gold);border-color:var(--gold);color:#fff}
+  button.reg{flex:0 0 auto;font:600 .8rem/1 system-ui;padding:.4rem .6rem;border-radius:999px;border:1px solid #3a4270;background:#1a2149;color:#e8eaf7;cursor:pointer;white-space:nowrap}
   button.reg:hover{background:#26305e}
   button.reg.active{background:var(--gold);border-color:var(--gold);color:#fff}
-  .cat{display:inline-flex;align-items:center;gap:.3rem;font-size:.8rem;background:#1a2149;border:1px solid #3a4270;border-radius:999px;padding:.28rem .55rem;cursor:pointer;user-select:none;color:#e8eaf7}
+  .cat{flex:0 0 auto;display:inline-flex;align-items:center;gap:.3rem;font-size:.8rem;background:#1a2149;border:1px solid #3a4270;border-radius:999px;padding:.28rem .55rem;cursor:pointer;user-select:none;color:#e8eaf7;white-space:nowrap}
   .cat input{accent-color:var(--gold);margin:0}
   .cat .sw{width:.7rem;height:.7rem;border-radius:50%;display:inline-block}
   #map{flex:1;min-height:0}
-  .note{background:#fff7e6;color:#5a4a1e;border-bottom:1px solid #f0dca8;padding:.45rem .8rem;font-size:.82rem}
+  .note{display:none;background:#fff7e6;color:#5a4a1e;border-bottom:1px solid #f0dca8;padding:.45rem .8rem;font-size:.82rem}
+  .note.open{display:block}
   .note b{color:#8a5a00}
   .note a{color:#8a5a00}
   .pin{width:26px;height:26px;border-radius:50% 50% 50% 2px;transform:rotate(45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.4);border:2px solid #fff}
@@ -32,7 +40,16 @@
   .pop-cat{display:inline-block;font-size:.72rem;font-weight:600;padding:.05rem .4rem;border-radius:6px;color:#fff;margin-bottom:.25rem}
   .pop-meta{color:#667;font-size:.78rem;margin-top:.35rem;font-family:ui-monospace,Menlo,monospace}
   .pop-meta a{color:var(--gold)}
-  @media (max-width:620px){header h1{font-size:.9rem}.sub{display:none}}
+  @media (max-width:760px){
+    header{padding:.35rem .5rem;gap:.3rem}
+    header h1{font-size:.85rem}
+    .sub{display:none}
+    .cat .sw{display:none}          /* barvu nese emoji, kolečko šetří místo */
+    .cat{font-size:.78rem;padding:.26rem .5rem}
+    button.reg{font-size:.78rem;padding:.36rem .55rem}
+    .bar{width:100%}                /* každá lišta na svůj řádek, ale bez zalamování */
+    .note{font-size:.78rem}
+  }
 </style>
 </head>
 <body>
@@ -40,6 +57,7 @@
   <header>
     <h1>🌞 Dětské body na cestě za zatměním</h1>
     <span class="sub">koupání · hřiště · atrakce · příroda · pozorování</span>
+    <button class="iconbtn" id="infoBtn" type="button" aria-expanded="false" aria-controls="keynote" title="Info o mapě">ⓘ</button>
     <div class="bar" style="margin-left:auto">
       <div class="grp" id="regs">
         <button class="reg active" data-r="all">🗺️ Celá cesta</button>
@@ -69,15 +87,15 @@
 const MAPY_KEY = "hNNgH_rAm9VIrDlLTDTuFfDsmlOU9lgXqxb0clf4h0c";   // mapy.cz klíč (omezený na doménu palmovnik.github.io)
 
 const CATS = {
-  swim:   {label:"🏊 Koupání",        color:"#2e86de"},
-  play:   {label:"🛝 Hřiště & parky",  color:"#27ae60"},
-  fun:    {label:"🦕 Atrakce",         color:"#8e44ad"},
-  nature: {label:"🌲 Příroda & výlety",color:"#12907a"},
-  eclipse:{label:"☀️ Pozorování zatmění",color:"#e08e0b"},
-  camp:   {label:"🏕️ Rodinný kemp (hřiště/bazén)",color:"#a0522d"},
-  wild:   {label:"🏜️ Divočina (přespat + západ)",color:"#d6336c"},
-  cave:   {label:"🕳️ Jeskyně",color:"#5d5fef"},
-  falls:  {label:"💦 Vodopády a tůně",color:"#00b3c8"}
+  swim:   {label:"🏊 Koupání",        short:"🏊 Koupání",  color:"#2e86de"},
+  play:   {label:"🛝 Hřiště & parky",  short:"🛝 Hřiště",   color:"#27ae60"},
+  fun:    {label:"🦕 Atrakce",         short:"🦕 Atrakce",  color:"#8e44ad"},
+  nature: {label:"🌲 Příroda & výlety",short:"🌲 Příroda",  color:"#12907a"},
+  eclipse:{label:"☀️ Pozorování zatmění",short:"☀️ Zatmění",color:"#e08e0b"},
+  camp:   {label:"🏕️ Rodinný kemp (hřiště/bazén)",short:"🏕️ Kempy",color:"#a0522d"},
+  wild:   {label:"🏜️ Divočina (přespat + západ)",short:"🏜️ Divočina",color:"#d6336c"},
+  cave:   {label:"🕳️ Jeskyně",short:"🕳️ Jeskyně",color:"#5d5fef"},
+  falls:  {label:"💦 Vodopády a tůně",short:"💦 Vodopády",color:"#00b3c8"}
 };
 
 // r = region, c = kategorie, n = název, note = popis; souřadnice ověřené proti OpenStreetMap
@@ -292,7 +310,8 @@ POIS.forEach(p=>{
 const catsBar=document.getElementById('cats');
 Object.entries(CATS).forEach(([k,v])=>{
   const l=document.createElement('label'); l.className='cat';
-  l.innerHTML='<input type="checkbox" checked> <span class="sw" style="background:'+v.color+'"></span>'+v.label;
+  l.innerHTML='<input type="checkbox" checked> <span class="sw" style="background:'+v.color+'"></span>'+(v.short||v.label);
+  l.title=v.label;
   l.querySelector('input').addEventListener('change',e=>{
     if(e.target.checked) groups[k].addTo(map); else map.removeLayer(groups[k]);
   });
@@ -308,11 +327,24 @@ document.querySelectorAll('button.reg').forEach(b=>{
   });
 });
 
+/* ⓘ — rozbalení/sbalení poznámky (po změně výšky přepočítej mapu) */
+(function(){
+  var btn=document.getElementById('infoBtn');
+  btn.addEventListener('click',function(){
+    var open=keynote.classList.toggle('open');
+    btn.classList.toggle('on',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    setTimeout(function(){ map.invalidateSize(); },60);
+  });
+})();
+
 /* dorovnání velikosti kontejneru a napasování na celou cestu
    (počkej, až má mapa reálnou výšku, jinak fitBounds spadne na maxZoom) */
 function fitAll(){ map.invalidateSize(); if(map.getSize().y<80){ setTimeout(fitAll,120); return; } map.fitBounds(BOUNDS.all,{padding:[20,20]}); }
 setTimeout(fitAll,150);
 window.addEventListener('load',fitAll);
+window.addEventListener('orientationchange',function(){ setTimeout(function(){ map.invalidateSize(); },250); });
+window.addEventListener('resize',function(){ map.invalidateSize(); });
 </script>
 </body>
 </html>
