@@ -271,8 +271,9 @@
   .cl-cat{background:var(--card);border:1px solid var(--card-line);border-radius:13px;padding:1rem 1.1rem;box-shadow:var(--shadow)}
   .cl-cat h4{font-size:.96rem;margin:0 0 .65rem;display:flex;align-items:center;gap:.5rem}
   .cl-cat ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
-  .cl-cat label{display:flex;gap:.55rem;align-items:flex-start;font-size:.9rem;color:var(--ink-soft);cursor:pointer;line-height:1.35}
-  .cl-cat input{margin-top:.15rem;width:1.05rem;height:1.05rem;accent-color:var(--accent);flex:0 0 auto;cursor:pointer}
+  /* pozn.: display:block + záporné odsazení — u flexu by se <b> uvnitř lámalo do sloupců */
+  .cl-cat label{display:block;padding-left:1.55rem;text-indent:-1.55rem;font-size:.9rem;color:var(--ink-soft);cursor:pointer;line-height:1.4}
+  .cl-cat input{width:1.05rem;height:1.05rem;accent-color:var(--accent);cursor:pointer;margin-right:.5rem;vertical-align:-.15rem;text-indent:0}
   .cl-cat label:focus-within{color:var(--ink)}
 
   @media (prefers-reduced-motion:reduce){
@@ -946,6 +947,163 @@
         </ul>
       </div>
     </div>
+  </div>
+</section>
+
+<hr class="divide">
+
+<!-- BALENÍ -->
+<section id="baleni">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Balení · odlet v neděli 9. 8.</div>
+      <h2>Co si vzít s sebou</h2>
+      <p class="sub">Sestaveno na míru: jídlo kupuješ na místě, nádobí a autosedačku máš půjčené, bereš dalekohled, brýle a spacáky. Zbytek je níže — odškrtej si to.</p>
+    </div>
+
+    <div class="callout"><b>⚠️ NEJDŮLEŽITĚJŠÍ — dalekohled a Slunce:</b> Do <b>částečně zakrytého Slunce</b> se dalekohledem <b>nikdy nedívej bez solárního filtru na objektivech</b> — ani s brýlemi na očích. Dalekohled soustředí sluneční svit natolik, že filtr v brýlích v okamžiku propálí a poškodí zrak <b>trvale a nevratně</b>. Buď si sežeň <b>certifikovaný solární filtr</b> (dnes, než odletíš), nebo platí jednoduché pravidlo: <b>dalekohled vytáhni až v okamžiku totality</b> (~20:28–20:30) a schovej ho, jakmile se objeví první paprsek. Během totality je pohled dalekohledem bezpečný a na korónu je úchvatný.</div>
+
+    <h3 class="cl-title">🔴 Sežeň ještě dnes (v Madridu už nemusí být)</h3>
+    <div class="checklist">
+      <div class="cl-cat">
+        <h4>👓 Zatmění</h4>
+        <ul>
+          <li><label><input type="checkbox"> Brýle <b>ISO 12312-2</b> — pro každého + náhradní</label></li>
+          <li><label><input type="checkbox"> Dětská velikost brýlí pro syna</label></li>
+          <li><label><input type="checkbox"> Solární filtr na dalekohled (jinak jen totalita)</label></li>
+          <li><label><input type="checkbox"> Kontrola: brýle bez škrábanců a dírek</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>📄 Doklady</h4>
+        <ul>
+          <li><label><input type="checkbox"> Občanka/pas — <b>i pro syna</b></label></li>
+          <li><label><input type="checkbox"> Řidičák (v EU stačí český)</label></li>
+          <li><label><input type="checkbox"> Evropský průkaz pojištěnce (EHIC)</label></li>
+          <li><label><input type="checkbox"> Cestovní pojištění</label></li>
+          <li><label><input type="checkbox"> Rezervace: let, hotel, půjčovna Nugget</label></li>
+          <li><label><input type="checkbox"> Karta + <b>100–150 € hotovost</b> (venkov, kempy)</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>💊 Lékárnička</h4>
+        <ul>
+          <li><label><input type="checkbox"> Dětský paralen/ibuprofen (sirup), teploměr</label></li>
+          <li><label><input type="checkbox"> Léky na kinetózu — <b>hodně serpentin</b></label></li>
+          <li><label><input type="checkbox"> Rehydratační sáčky, něco na průjem</label></li>
+          <li><label><input type="checkbox"> Náplasti, dezinfekce, pinzeta</label></li>
+          <li><label><input type="checkbox"> Gel po opalování, repelent, po štípnutí</label></li>
+          <li><label><input type="checkbox"> Vaše běžné léky</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="cl-title">🎒 Do kufru</h3>
+    <div class="checklist">
+      <div class="cl-cat">
+        <h4>👕 Oblečení — obří rozpětí teplot</h4>
+        <ul>
+          <li><label><input type="checkbox"> Na den 30–36 °C: trika, kraťasy, sandály</label></li>
+          <li><label><input type="checkbox"> <b>Na noc 13–17 °C:</b> mikina/fleece, dlouhé kalhoty, ponožky</label></li>
+          <li><label><input type="checkbox"> Lehká nepromokavá bunda (Asturie prší)</label></li>
+          <li><label><input type="checkbox"> Klobouk s krempou pro všechny</label></li>
+          <li><label><input type="checkbox"> Plavky (2×) + rychleschnoucí ručníky</label></li>
+          <li><label><input type="checkbox"> Pevné boty (jeskyně, kaňony) + sandály</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>🧒 Pro syna</h4>
+        <ul>
+          <li><label><input type="checkbox"> Krém SPF 50+, klobouk, sluneční brýle</label></li>
+          <li><label><input type="checkbox"> <b>Boty do vody</b> (oblázky, skály, tůně)</label></li>
+          <li><label><input type="checkbox"> Plyšák / oblíbená deka na spaní</label></li>
+          <li><label><input type="checkbox"> Oblečení navíc (voda, bláto, zmrzlina)</label></li>
+          <li><label><input type="checkbox"> Vlhčené ubrousky, nočník na cesty</label></li>
+          <li><label><input type="checkbox"> Zábava na auto: knížky, tablet + sluchátka, audio pohádky <b>offline</b></label></li>
+          <li><label><input type="checkbox"> Cedník — projekce půlměsíčků na zemi (hra)</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>🌙 Spaní v Nuggetu</h4>
+        <ul>
+          <li><label><input type="checkbox"> Spacáky ✔ + <b>polštáře</b></label></li>
+          <li><label><input type="checkbox"> Prostěradlo/lehká deka (v nížině je na spacák horko)</label></li>
+          <li><label><input type="checkbox"> Čelovky + baterky (klidně červené světlo)</label></li>
+          <li><label><input type="checkbox"> Špunty do uší</label></li>
+          <li><label><input type="checkbox"> Repelent / síťka proti hmyzu</label></li>
+          <li><label><input type="checkbox"> Malý USB ventilátor (dusné noci v nížině)</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>🥵 Horko a voda</h4>
+        <ul>
+          <li><label><input type="checkbox"> Láhve na vodu 2–3 × 1,5 l + termoska</label></li>
+          <li><label><input type="checkbox"> Elektrolyty / rehydratace</label></li>
+          <li><label><input type="checkbox"> Sluneční clona do čelního skla</label></li>
+          <li><label><input type="checkbox"> Stín navíc — plachta/slunečník (když není markýza)</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>🔌 Elektronika</h4>
+        <ul>
+          <li><label><input type="checkbox"> Nabíječky — <b>adaptér netřeba</b>, zásuvka jako v ČR</label></li>
+          <li><label><input type="checkbox"> Velká powerbanka + USB do auta, dlouhé kabely</label></li>
+          <li><label><input type="checkbox"> Dalekohled <b>(+ filtr!)</b>, foťák, stativ</label></li>
+          <li><label><input type="checkbox"> <b>Offline mapy</b> Španělska (mapy.cz i Google)</label></li>
+          <li><label><input type="checkbox"> Appky: PhotoPills, ShadowMap, Windy, AEMET, Park4Night</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>🧴 Drobnosti</h4>
+        <ul>
+          <li><label><input type="checkbox"> Hygiena, opalovací krém navíc</label></li>
+          <li><label><input type="checkbox"> Pytle na odpadky a na mokré/špinavé věci</label></li>
+          <li><label><input type="checkbox"> Malý batoh na den D a na výlety</label></li>
+          <li><label><input type="checkbox"> Prací gel v malém balení</label></li>
+          <li><label><input type="checkbox"> Šňůra na prádlo, kolíčky</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="cl-title">✈️ Do příručního (ne do odbaveného!)</h3>
+    <div class="checklist">
+      <div class="cl-cat">
+        <h4>🎒 Nesmí se ztratit</h4>
+        <ul>
+          <li><label><input type="checkbox"> <b>Brýle na zatmění</b> — v Madridu už je neseženeš</label></li>
+          <li><label><input type="checkbox"> Doklady, karty, hotovost</label></li>
+          <li><label><input type="checkbox"> Léky + lékárnička</label></li>
+          <li><label><input type="checkbox"> Nabíječky, powerbanka <b>(nesmí do kufru!)</b></label></li>
+          <li><label><input type="checkbox"> Náhradní oblečení pro syna + svačina</label></li>
+          <li><label><input type="checkbox"> Tekutiny do 100 ml</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>🚐 Ověř u půjčovny (nebal)</h4>
+        <ul>
+          <li><label><input type="checkbox"> Autosedačka — potvrzená, na věk/váhu syna</label></li>
+          <li><label><input type="checkbox"> Nádobí a kuchyň ✔ (co přesně tam je?)</label></li>
+          <li><label><input type="checkbox"> <b>Plná plynová bomba</b></label></li>
+          <li><label><input type="checkbox"> Kempingové židle a stůl — v ceně?</label></li>
+          <li><label><input type="checkbox"> Povlečení / deky — součástí?</label></li>
+          <li><label><input type="checkbox"> Vesty (2×) + trojúhelník — <b>povinné ve Španělsku</b></label></li>
+          <li><label><input type="checkbox"> Lednička na 12 V i 230 V, kanystr na vodu</label></li>
+          <li><label><input type="checkbox"> Mýtné — jak se platí, je v autě transpondér?</label></li>
+        </ul>
+      </div>
+      <div class="cl-cat">
+        <h4>❌ Nech doma</h4>
+        <ul>
+          <li><label><input type="checkbox"> Nádobí a autosedačka (půjčeno)</label></li>
+          <li><label><input type="checkbox"> Zásoby jídla — koupíš tam levněji</label></li>
+          <li><label><input type="checkbox"> Stan a karimatky</label></li>
+          <li><label><input type="checkbox"> Kopa knížek (váha)</label></li>
+          <li><label><input type="checkbox"> Fén, žehlička, zbytečná elektronika</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout info"><b>💡 Tři věci, na které se zapomíná:</b> <b>1)</b> Stáhni si <b>offline mapy</b> ještě doma — v horách Sorie a Picos je signál mizerný. <b>2)</b> Zásoby nakup <b>v pondělí nebo úterý</b>; ve středu odpoledne je všude nával a na vesnicích bývá v neděli zavřeno. <b>3)</b> Vezmi <b>víc teplého oblečení, než ti přijde rozumné</b> — přes den bude 35 °C, ale v Sorii nebo Picos může noc spadnout ke 12 °C a během totality se navíc citelně ochladí.</div>
   </div>
 </section>
 
