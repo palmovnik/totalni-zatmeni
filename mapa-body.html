@@ -116,7 +116,7 @@ const POIS = [
   // ---------- SORIA / PINARES ----------
   {r:"soria",c:"swim",   n:"Playa Pita (Cuerda del Pozo)", note:"Písečná „pláž“ u přehrady ve výšce — koupání v chládku.", lat:41.8529,lng:-2.785},
   {r:"soria",c:"swim",   n:"Embalse Cuerda del Pozo — La Muedra", note:"Další rekreační břeh přehrady.", lat:41.8659,lng:-2.7238},
-  {r:"soria",c:"nature", n:"Laguna Negra", note:"Ledovcové jezero pod skalami, krátká procházka (koupání zakázané).", lat:41.9970,lng:-2.8480},
+  {r:"soria",c:"nature", n:"Laguna Negra", note:"Ledovcové jezero (~1750 m) pod skalní stěnou, dřevěné vyhlídkové lávky kolem. Níž je louka „playa“, kde si děti hrají u vody. ⚠️ V létě bývá silnice nahoru omezená a jezdí kyvadlový autobus od spodního parkoviště — ověř na místě.", lat:41.9970,lng:-2.8480},
   {r:"soria",c:"nature", n:"Cañón del Río Lobos", note:"Kaňon se supy, řeka a ermita — snadná procházka.", lat:41.7841,lng:-3.0921},
   {r:"soria",c:"nature", n:"Monte Valonsadero", note:"Otevřená dehesa, jeskynní malby. ☀️ i pozorovací bod.", lat:41.8055,lng:-2.5137},
   {r:"soria",c:"play",   n:"Alameda de Cervantes (Soria)", note:"Městský park — hřiště, kolotoč, stín.", lat:41.7636,lng:-2.4735},
@@ -154,6 +154,7 @@ const POIS = [
   {r:"coast",c:"eclipse",n:"Faro de Cabo Peñas — pozorování", note:"Úplně volný obzor nad mořem, totalita ~1:44.", lat:43.6557,lng:-5.8485},
   {r:"coast",c:"eclipse",n:"Paseo de San Pedro, Llanes — pozorování", note:"Travnatá promenáda, nekonečný výhled na západ.", lat:43.4244,lng:-4.7559},
   {r:"coast",c:"eclipse",n:"Ribadesella — Mirador de Guía", note:"Návrší nad ústím, volný obzor na moře.", lat:43.4685,lng:-5.0648},
+  {r:"coast",c:"eclipse",n:"Mirador de la Boriza (Andrín)", note:"Útesová vyhlídka východně od Llanes — moře na Z–SZ, klidnější než promenáda v Llanes a auto zaparkuješ prakticky u ní.", lat:43.4101,lng:-4.7117},
 
   // ---------- RODINNÉ KEMPY (hřiště/bazén, nejlépe hodnocené, chládek/výhled) ----------
   {r:"soria",c:"camp",n:"Camping El Concurso (Abejar)", note:"Borový les ~1100 m (chládek), bazén, hřiště, minigolf; 3 km od Playa Pita. Velmi dobře hodnocený.", lat:41.8176,lng:-2.7909},
@@ -225,7 +226,31 @@ const POIS = [
   {r:"ebro",c:"nature",n:"Foz de Lumbier (Navarra)", note:"Krátká soutěska po staré železnici s tunely a supy — ideální délka pro děti.", lat:42.6322,lng:-1.3018},
   {r:"ebro",c:"nature",n:"Selva de Irati", note:"Rozlehlý bukový prales, chladno a stín i v srpnu.", lat:42.9046,lng:-1.0926},
   {r:"ebro",c:"fun",n:"Barranco Perdido (Enciso, Rioja)", note:"Dinosauří paleo-dobrodružný park se stopami dinosaurů a vodní zónou.", lat:42.145,lng:-2.2699},
-  {r:"ebro",c:"fun",n:"Acuario de Zaragoza", note:"Jedno z největších sladkovodních akvárií v Evropě.", lat:41.6692,lng:-0.8986}
+  {r:"ebro",c:"fun",n:"Acuario de Zaragoza", note:"Jedno z největších sladkovodních akvárií v Evropě.", lat:41.6692,lng:-0.8986},
+
+  /* ===================== PICOS: vyhlídky na Naranjo de Bulnes + okolí ===================== */
+  {r:"picos",c:"nature",n:"⭐ Mirador del Pozo de la Oración", note:"NEJLEPŠÍ vyhlídka na Naranjo de Bulnes dostupná autem — stojí přímo u silnice AS-114 mezi Carreña a Poo de Cabrales, velké parkoviště, lavičky na svačinu. Nikam se nešlape.", lat:43.3125,lng:-4.8420},
+  {r:"picos",c:"nature",n:"Mirador de Camarmeña", note:"Nejbližší silniční vyhlídka na Naranjo — úzká silnička nahoru z Poncebos, parkoviště je ale MALÉ. Výhled ještě dramatičtější než Pozo de la Oración.", lat:43.2592,lng:-4.8365},
+  {r:"picos",c:"nature",n:"Naranjo de Bulnes (Picu Urriellu) 2519 m", note:"Samotná ikonická věž — orientační bod, kam se z vyhlídek díváš.", lat:43.2008,lng:-4.8177},
+  {r:"picos",c:"nature",n:"Mirador de la Reina", note:"Vyhlídka u silnice na jezera Covadonga — panorama hor i pobřeží. Drive-up, cestou na Lagos.", lat:43.2916,lng:-5.0085},
+  {r:"picos",c:"nature",n:"Mirador de El Cable (Fuente Dé)", note:"Horní stanice lanovky, 1830 m — obří rozhled do masivu. Nahoru za pár minut, ideální s dítětem.", lat:43.1535,lng:-4.8057},
+  {r:"picos",c:"fun",n:"Poncebos (funikulár do Bulnes)", note:"Odtud jede pozemní lanovka do vesnice Bulnes bez silnice a začíná Ruta del Cares.", lat:43.2618,lng:-4.8314},
+  {r:"picos",c:"fun",n:"Arenas de Cabrales — sýrová jeskyně", note:"Cueva Exposición: jak zraje sýr Cabrales přímo v jeskyni. Krátká prohlídka, dobrá zastávka v horku.", lat:43.3034,lng:-4.8147},
+  {r:"picos",c:"nature",n:"Desfiladero de los Beyos", note:"Úzká soutěska na N-625 — jízda autem mezi kolmými stěnami, cesta z Cangas směr Riaño.", lat:43.1900,lng:-5.0400},
+
+  /* ===================== HORY NAD SORIOU (Urbión, Cebollera, Tierras Altas) ===================== */
+  {r:"soria",c:"falls",n:"⭐ Cascada de Cueva Serena", note:"Vodopád padající přímo z jeskynní pukliny ve skále — nejhezčí zastávka nad Duruelem. Krátká cesta, dá se spojit s Castroviejem a Chorlou do jednoho okruhu.", lat:41.9877,lng:-2.9298},
+  {r:"soria",c:"nature",n:"Mirador de Castroviejo", note:"Vyhlídka nad pískovcovým skalním městem — bizarní věže a bludiště, děti nadšené. Autem skoro až nahoru.", lat:41.9861,lng:-2.9213},
+  {r:"soria",c:"nature",n:"Puerto de Santa Inés (1753 m)", note:"Asfaltový průsmyk mezi Soriou a Riojou — nejvýš dosažitelné místo autem v okolí. Chladno, rozhled, prázdno.", lat:42.0384,lng:-2.7849},
+  {r:"soria",c:"nature",n:"Pico Frentes — vyhlídka nad Soriou", note:"Skalní hrana přímo nad městem s výhledem na údolí Duera. Blízko, snadné.", lat:41.7908,lng:-2.5624},
+  {r:"soria",c:"fun",n:"🦕 Villar del Río — Aula Paleontológica", note:"Srdce Ruty de las Icnitas: muzeum stop dinosaurů + replika brachiosaura v životní velikosti. Pro čtyřletého asi největší zážitek v Sorii.", lat:42.0757,lng:-2.3508},
+  {r:"soria",c:"fun",n:"🦕 Bretún — La Matecasa (stopy dinosaurů)", note:"Nejnavštěvovanější naleziště otisků; u vsi vítá replika triceratopse. Stopy jsou přímo ve skále pod nohama.", lat:42.0613,lng:-2.3861},
+  {r:"soria",c:"fun",n:"🦕 Santa Cruz de Yanguas — stegosaurus", note:"Model stegosaura u kostela + naleziště icnit. Součást dinosauří trasy.", lat:42.0626,lng:-2.4489},
+  {r:"soria",c:"play",n:"San Pedro Manrique — dinopark", note:"Odpočinkový park s dinosaury na konci Ruty de las Icnitas — hřiště a stín.", lat:42.0292,lng:-2.2298},
+  {r:"soria",c:"nature",n:"🚇 Vía Verde Santander–Mediterráneo (tunely)", note:"Bývalá železnice proměněná ve stezku: 15 TUNELŮ (46–592 m) a mosty, rovinka bez aut — paráda na kočárek i odrážedlo. Začíná u Sorie (Golmayo) a vede až ke Cañón del Río Lobos. Vezmi čelovky!", lat:41.7664,lng:-2.5229},
+  {r:"soria",c:"cave",n:"Ermita de San Bartolomé + Cueva Grande", note:"Templářská kaple v srdci kaňonu Río Lobos, hned vedle obrovské jeskynní ústí. Rovná cesta od parkoviště, supi nad hlavou.", lat:41.7517,lng:-3.0683},
+  {r:"soria",c:"camp",n:"Vinuesa — základna v Pinares", note:"Horská vesnice mezi borovicemi (~1100 m) — kempy, área, bazén, obchod. Ideální noclehová základna pro celé Urbión.", lat:41.9118,lng:-2.7631},
+  {r:"soria",c:"nature",n:"Duruelo de la Sierra", note:"Výchozí bod k Cueva Serena, Castroviejo i k prameni Duera. Chladno, borovice.", lat:41.9541,lng:-2.9324}
 ];
 
 const BOUNDS = {
